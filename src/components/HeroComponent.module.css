@@ -1,0 +1,18 @@
+.hero {
+  background-image: url('/Hero3.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 500px; /* Adjust height as needed */
+  width: 100%; /* Adjust width as needed */
+  gap: 3rem;
+  /* margin: 20px auto;
+    border: 1px solid #ccc; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 5rem;
+  text-shadow: 2px 2px 4px rgb(0, 0, 0);
+}
