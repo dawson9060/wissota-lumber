@@ -1,4 +1,7 @@
+import PriceType from '@/enums/PriceType'
 import WoodSpecies from '@/enums/WoodSpecies'
+import WoodState from '@/enums/WoodStates'
+import WoodThickness from '@/enums/WoodThickness'
 import { Lumber, Media } from '@/payload-types'
 import { Box, Divider, Group, List, Stack, Text, Title } from '@mantine/core'
 import Image from 'next/image'
@@ -13,28 +16,31 @@ const LumberDisplay = ({ lumberInfo }: { lumberInfo: Lumber }) => {
     <Group
       justify="space-between"
       align="flex-start"
-      h="100%"
+      h="fit-content"
       bg="white"
       bdrs="md"
       style={{ boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)' }}
     >
       <Stack align="flex-start" justify="flex-start" h="100%" style={{ flexGrow: 1 }} p="1rem">
-        <Title order={4}>{WoodSpecies[lumberInfo.woodSpecies]}</Title>
+        <Group w="100%" justify="space-between">
+          <Title order={5}>{WoodSpecies[lumberInfo.woodSpecies]}</Title>
+          <Text>
+            ${lumberInfo.price} {PriceType[lumberInfo.priceType]}
+          </Text>
+        </Group>
         <Divider w="100%" />
-        <Text>
-          Price: ${lumberInfo.price} per{' '}
-          {lumberInfo.priceType === 'board_foot' ? 'board foot' : 'piece'}
-        </Text>
+
         <List>
-          <List.Item>Thickness: {lumberInfo.dimensions}</List.Item>
-          <List.Item>Type: {lumberInfo.cutType === 'planed' ? 'Planed' : 'Rough'}</List.Item>
+          <List.Item>Thickness: {WoodThickness[lumberInfo.thickness]}</List.Item>
+          <List.Item>Type: {WoodState[lumberInfo.woodState]}</List.Item>
           <List.Item>Approx. Available: {lumberInfo.amountAvailable}</List.Item>
+          <List.Item>Wood Grade / Sawing Type / Dimensions: </List.Item>
         </List>
       </Stack>
       {imagePath ? (
         <Image
           src={imagePath}
-          alt={lumberInfo.name}
+          alt={lumberInfo.description || 'Lumber Image'}
           width={300}
           height={200}
           style={{ borderTopRightRadius: '8px', borderBottomRightRadius: '8px' }}
