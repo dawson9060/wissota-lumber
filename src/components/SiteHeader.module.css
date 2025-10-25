@@ -13,7 +13,7 @@
   max-width: 1400px;
   margin: 0 auto;
   justify-content: space-between;
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem;
 }
 
 .links {
@@ -22,9 +22,7 @@
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 
-    &:hover {
-      color: var(--mantine-color-blue-5);
-    }
+  &:hover {
+    color: var(--mantine-color-blue-5);
+  }
 }
-
-
