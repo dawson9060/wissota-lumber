@@ -1,0 +1,12 @@
+.inventoryContainer {
+  height: 100%;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+  max-height: calc(100vh - 300px);
+  min-height: 0;
+}

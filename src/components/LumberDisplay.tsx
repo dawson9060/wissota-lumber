@@ -10,7 +10,7 @@ const LumberDisplay = ({ lumberInfo }: { lumberInfo: Lumber }) => {
   const baseUrl = process.env.NEXT_PUBLIC_PAYLOAD_URL
   const imagePath = lumberInfo?.image?.url
   const fullImagePath = `${baseUrl}${imagePath}`
-  console.log('FULL IMAGE PATH', fullImagePath)
+  // console.log('FULL IMAGE PATH', fullImagePath)
 
   return (
     <Group
@@ -18,7 +18,7 @@ const LumberDisplay = ({ lumberInfo }: { lumberInfo: Lumber }) => {
       align="flex-start"
       h="fit-content"
       bg="white"
-      bdrs="md"
+      bdrs="sm"
       style={{ boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)' }}
     >
       <Stack align="flex-start" justify="flex-start" h="100%" style={{ flexGrow: 1 }} p="1rem">
@@ -31,7 +31,7 @@ const LumberDisplay = ({ lumberInfo }: { lumberInfo: Lumber }) => {
         <Divider w="100%" />
 
         <List>
-          <List.Item>Thickness: {WoodThickness[lumberInfo.thickness]}</List.Item>
+          <List.Item>Thickness: {lumberInfo.customThickness || WoodThickness[lumberInfo.thickness]}"</List.Item>
           <List.Item>Type: {WoodState[lumberInfo.woodState]}</List.Item>
           <List.Item>Approx. Available: {lumberInfo.amountAvailable}</List.Item>
           <List.Item>Wood Grade / Sawing Type / Dimensions: </List.Item>
@@ -43,10 +43,10 @@ const LumberDisplay = ({ lumberInfo }: { lumberInfo: Lumber }) => {
           alt={lumberInfo.description || 'Lumber Image'}
           width={300}
           height={200}
-          style={{ borderTopRightRadius: '8px', borderBottomRightRadius: '8px' }}
+          style={{ borderTopRightRadius: '6px', borderBottomRightRadius: '6px' }}
         />
       ) : (
-        <Box w={300} h={200} bg="gray.5" />
+        <Box w={300} h={200} bg="gray.5" style={{ borderTopRightRadius: '6px', borderBottomRightRadius: '6px' }} />
       )}
     </Group>
   )

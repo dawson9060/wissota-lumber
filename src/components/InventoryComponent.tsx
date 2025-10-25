@@ -1,5 +1,9 @@
 'use client'
 
+import WoodSpecies from '@/enums/WoodSpecies'
+import WoodState from '@/enums/WoodStates'
+import WoodThickness from '@/enums/WoodThickness'
+import { Lumber } from '@/payload-types'
 import {
   Button,
   Checkbox,
@@ -13,111 +17,143 @@ import {
   Text,
   Title,
 } from '@mantine/core'
-import LumberDisplay from './LumberDisplay'
-import { Lumber } from '@/payload-types'
-import { PaginatedDocs } from 'payload'
 import { useDisclosure } from '@mantine/hooks'
+import { PaginatedDocs } from 'payload'
 import { useEffect, useState } from 'react'
-import WoodSpecies from '@/enums/WoodSpecies'
-import WoodState from '@/enums/WoodStates'
+import LumberDisplay from './LumberDisplay'
+
+import classes from './InventoryComponent.module.css';
 
 const SORT_SPECIES = 'Species'
 const SORT_PRICE = 'Price'
 const SORT_TYPE = 'Type'
 
-const sortTypes = [SORT_SPECIES, SORT_PRICE, SORT_TYPE]
+const sortTypes = [SORT_SPECIES, SORT_PRICE, SORT_TYPE];
 
-const FilterDrawer = () => {
+const FilterDrawer = ({ defaultData, setActiveData, sortType }: { defaultData: Lumber[], setActiveData: Function, sortType: string} ) => {
+  const [speciesFilters, setSpeciesFilters] = useState<string[]>([]);
+  const [stateFilters, setStateFilters] = useState<string[]>([]);
+  const [thicknessFilters, setThicknessFilters] = useState<string[]>([]);
+
+  const numFilters = speciesFilters.length + stateFilters.length + thicknessFilters.length;
+  
   const [opened, { open, close }] = useDisclosure(false)
 
-  const handleSpeciesFilter = (species: string) => {
-    console.log('Species', species)
-  }
+  useEffect(() => {
+    let newData = [...defaultData];
+
+    if (speciesFilters.length > 0) {
+      newData = newData.filter((lumber: Lumber) => speciesFilters.includes(lumber.woodSpecies));
+    }
+    if (stateFilters.length > 0) {
+      newData = newData.filter((lumber: Lumber) => stateFilters.includes(lumber.woodState));
+    }
+    if (thicknessFilters.length > 0) {
+      newData = newData.filter((lumber: Lumber) => thicknessFilters.includes(lumber.thickness));
+    }
+
+    const sortParameter =
+      sortType === SORT_SPECIES ? 'woodSpecies' : sortType === SORT_PRICE ? 'price' : 'woodState'
+
+    const sorted = newData.sort((a, b) => {
+      return a[sortParameter] > b[sortParameter] ? 1 : -1
+    });
+
+    setActiveData(sorted)
+  }, [speciesFilters, stateFilters, thicknessFilters, sortType]);
+
+  const handleResetFilters = () => {
+    setSpeciesFilters([]);
+    setStateFilters([]);
+    setThicknessFilters([]);
+
+    const sortParameter =
+      sortType === SORT_SPECIES ? 'woodSpecies' : sortType === SORT_PRICE ? 'price' : 'woodState'
+
+    const sorted = defaultData.sort((a, b) => {
+      return a[sortParameter] > b[sortParameter] ? 1 : -1
+    });
+
+    setActiveData(sorted);
+
+    close();
+  };
 
   return (
     <>
       <Drawer
         opened={opened}
         onClose={close}
-        title="Filters"
         scrollAreaComponent={ScrollArea.Autosize}
-        styles={{
-          body: {
-            height: '100vh !important',
-          },
-        }}
       >
-        <Stack>
-          <Text fw="bold">Wood Species</Text>
-          {Object.entries(WoodSpecies).map(([key, value]) => (
-            <Checkbox key={key} label={value} onChange={() => handleSpeciesFilter(value)} />
-          ))}
-        </Stack>
-        <Divider w="100%" my="1rem" />
-        <Stack>
-          <Text fw="bold">Wood Type</Text>
-          {Object.entries(WoodState).map(([key, value]) => (
-            <Checkbox key={key} label={value} onChange={() => handleSpeciesFilter(value)} />
-          ))}
-        </Stack>
+          <Stack>
+            <Group w="100%" justify='space-between'>
+              <Text fw="bold">Wood Species</Text>
+              <Button variant="outline" size="compact-sm" color="blue.5" onClick={() => handleResetFilters()}>Reset Filters</Button>
+            </Group>
+            <Checkbox.Group value={speciesFilters} onChange={setSpeciesFilters}>
+              {Object.entries(WoodSpecies).map(([key, value]) => (
+                <Checkbox color="blue.5" mb="0.5rem" key={key} label={value} value={key} />
+              ))}
+            </Checkbox.Group>
+          </Stack>
+          <Divider w="100%" my="1rem" />
+          <Stack>
+            <Text fw="bold">Wood Type</Text>
+            <Checkbox.Group value={stateFilters} onChange={setStateFilters}>
+              {Object.entries(WoodState).map(([key, value]) => (
+                <Checkbox color="blue.5" mb="0.5rem" key={key} label={value} value={key} />
+              ))}
+            </Checkbox.Group>
+          </Stack>
+          <Divider w="100%" my="1rem" />
+          <Stack>
+            <Text fw="bold">Wood Thickness</Text>
+            <Checkbox.Group value={thicknessFilters} onChange={setThicknessFilters}>
+              {Object.entries(WoodThickness).map(([key, value]) => (
+                <Checkbox color="blue.5" mb="0.5rem" key={key} label={value} value={key} />
+              ))}
+            </Checkbox.Group>
+          </Stack>
       </Drawer>
 
-      <Button color="blue" variant="subtle" onClick={open}>
-        Filters
+      <Button color="blue" variant="outline" onClick={open}>
+        Filters {numFilters > 0 && `(${numFilters})`}
       </Button>
     </>
   )
 }
 
 const InventoryComponent = ({ inventory }: { inventory: PaginatedDocs<Lumber> }) => {
-  const [activeData, setActiveDate] = useState<Lumber[]>([])
+  const [activeData, setActiveData] = useState<Lumber[]>([]);
+  const [sortType, setSortType] = useState<string>(SORT_SPECIES);
 
   useEffect(() => {
-    setActiveDate(inventory?.docs || [])
-  }, [inventory])
-
-  const handleSort = (value: any) => {
-    const initialData = [...(inventory?.docs || [])]
-    const sortParameter =
-      value === SORT_SPECIES ? 'woodSpecies' : value === SORT_PRICE ? 'price' : 'woodState'
-
-    const sorted = initialData.sort((a, b) => {
-      return a[sortParameter] > b[sortParameter] ? 1 : -1
-    })
-
-    setActiveDate(sorted)
-  }
+    setActiveData(inventory?.docs || [])
+  }, [inventory]);
 
   return (
-    <>
+    <Stack className={classes.inventoryContainer}>
       <Group justify="space-between">
         <Title order={2}>Current Inventory</Title>
         <Group>
-          <FilterDrawer />
-          <Select
-            defaultValue="Species"
-            data={sortTypes}
-            allowDeselect={false}
-            onChange={handleSort}
-            w="120px"
-          />
+          <FilterDrawer defaultData={inventory?.docs || []} setActiveData={setActiveData} sortType={sortType} />
+          <Select value={sortType} onChange={(val) => setSortType(val ?? SORT_SPECIES)} allowDeselect={false} data={sortTypes} c="blue.5" />
         </Group>
       </Group>
       <Divider />
-      <Stack h="100%" gap="0.5rem">
-        {activeData.length === 0 ? (
-          <Skeleton h="100%" w="100%" />
-        ) : (
-          activeData.map((item) => <LumberDisplay key={item.id} lumberInfo={item} />)
-        )}
-      </Stack>
-      {/* <ScrollArea h="100%" offsetScrollbars="y"> */}
-
-      {/* </ScrollArea> */}
-      <Group bg="black" c="white" p="1rem" w="100%">
-        Wissota Lumber {new Date().getFullYear()}
-      </Group>
-    </>
+      <ScrollArea h="100%" offsetScrollbars="y">
+        <Stack gap="0.5rem" pb="1rem">
+          {inventory?.docs.length > 0 && activeData.length === 0 ? (
+            <Text>No Items Match Your Filters</Text>
+          ) : activeData.length === 0 ? (
+            <Skeleton h="100%" mih="70vh" w="100%" />
+          ) : (
+            activeData.map((item) => <LumberDisplay key={item.id} lumberInfo={item} />)
+          )}
+        </Stack>
+      </ScrollArea>
+    </Stack>
   )
 }
 

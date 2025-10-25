@@ -1,16 +1,19 @@
-import { Anchor, Button, Group, Text, Title } from '@mantine/core'
-import classes from './SiteHeader.module.css'
-import Link from 'next/link'
+import { Box, Group, Title } from '@mantine/core';
+import Link from 'next/link';
+import ContactModal from './ContactModal';
+import classes from './SiteHeader.module.css';
 
 const SiteHeader = () => {
   return (
     <nav className={classes.nav}>
-      <Link href="/">
-        <Title order={3}>Wissota Lumber</Title>
-      </Link>
-      <Group>
-        <Link href="/inventory">Inventory</Link>
-        <Anchor href="#contact">Contact Us</Anchor>
+      <Group className={classes.navRow}>
+        <Link href="/" style={{ textDecoration: 'none' }}>
+          <Title order={3} c="black">Wissota Lumber</Title>
+        </Link>
+        <Group>
+          <Link href="/inventory" className={classes.links}>Inventory</Link>
+          <ContactModal />
+        </Group>
       </Group>
     </nav>
   )

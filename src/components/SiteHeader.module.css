@@ -8,3 +8,23 @@
   background-color: white;
   box-shadow: 0px 1px 15px 1px rgba(0, 0, 0, 0.1);
 }
+
+.navRow {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.links {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+    &:hover {
+      color: var(--mantine-color-blue-5);
+    }
+}
+
+

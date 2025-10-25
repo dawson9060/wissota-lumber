@@ -60,7 +60,7 @@ const Lumber: CollectionConfig = {
       type: 'text',
       label: 'Custom Thickness',
       admin: {
-        condition: (_, siblingData) => siblingData.thickness === 'Custom',
+        condition: (_, siblingData) => siblingData.thickness === 'CUSTOM',
       },
     },
     {
