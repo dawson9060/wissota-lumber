@@ -142,7 +142,7 @@ const InventoryComponent = ({ inventory }: { inventory: PaginatedDocs<Lumber> })
         </Group>
       </Group>
       <Divider />
-      <Stack h="100%" mah="calc(100vh - 220px)" style={{ overflowY: 'auto' }}>
+      <Stack h="100%" mah="calc(100vh - 225px)" style={{ overflowY: 'auto' }}>
         <Stack gap="0.5rem" pb="1rem">
           {inventory?.docs.length > 0 && activeData.length === 0 ? (
             <Text>No Items Match Your Filters</Text>
