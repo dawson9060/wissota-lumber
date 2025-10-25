@@ -142,7 +142,7 @@ const InventoryComponent = ({ inventory }: { inventory: PaginatedDocs<Lumber> })
         </Group>
       </Group>
       <Divider />
-      <ScrollArea h="100%" offsetScrollbars="y">
+      <Stack h="100%" mah="calc(100vh - 220px)" style={{ overflowY: 'auto' }}>
         <Stack gap="0.5rem" pb="1rem">
           {inventory?.docs.length > 0 && activeData.length === 0 ? (
             <Text>No Items Match Your Filters</Text>
@@ -152,7 +152,8 @@ const InventoryComponent = ({ inventory }: { inventory: PaginatedDocs<Lumber> })
             activeData.map((item) => <LumberDisplay key={item.id} lumberInfo={item} />)
           )}
         </Stack>
-      </ScrollArea>
+      </Stack>
+
     </Stack>
   )
 }

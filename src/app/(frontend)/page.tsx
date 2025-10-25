@@ -16,8 +16,8 @@ export default async function HomePage() {
   return (
     <>
       <HeroComponent />
-      <Stack gap="0" className={classes.landingContainer}>
-        <Stack gap="2rem" px="1rem" my="2rem">
+      <Stack gap="2rem" className={classes.landingContainer}>
+        <Stack gap="2rem" px="2rem">
           <Title order={3}>Services</Title>
           <SimpleGrid cols={2}>
             <Skeleton h="300px" w="100%" />
@@ -53,7 +53,7 @@ export default async function HomePage() {
             </Stack>
           </SimpleGrid>
         </Stack>
-        <Stack bg="blue.0" py="1rem" px="1rem" gap="2rem">
+        <Stack bg="blue.0" py="2rem" px="2rem" gap="2rem">
           <SimpleGrid cols={2}>
             <Stack>
               <Title order={3}>Hours</Title>
@@ -61,7 +61,7 @@ export default async function HomePage() {
               <Text>Saturday: 8:00 AM - 12:00 PM</Text>
               <Text>Sunday: Closed</Text>
             </Stack>
-            <Stack id="contact">
+            <Stack>
               <Title order={3}>Contact Us</Title>
               <Text>Phone: (715) 828-7239</Text>
               <Text>Email: wissotalumber@gmail.com</Text>
@@ -74,10 +74,10 @@ export default async function HomePage() {
               </Link>
             </Stack>
           </SimpleGrid>
-          <Stack>
-            <Title order={3}>Find Us</Title>
-            <MapWrapper />
-          </Stack>
+        </Stack>
+        <Stack px="2rem" mb="1rem">
+          <Title order={3}>Find Us</Title>
+          <MapWrapper />
         </Stack>
       </Stack>
     </>
