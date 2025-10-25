@@ -16,7 +16,7 @@ export default async function InventoryPage() {
   console.log('INVENTORY', inventory)
 
   return (
-    <Stack mt="2rem" px="2rem" w="100%" h="100%" style={{ overflowY: 'hidden' }}>
+    <Stack mt="2rem" px="2rem" w="100%" h="100%" maw="1400px" mx="auto" style={{ overflowY: 'hidden' }}>
       <InventoryComponent inventory={inventory} />
     </Stack>
   )
