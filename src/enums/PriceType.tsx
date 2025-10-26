@@ -1,6 +1,6 @@
 enum PriceType {
-  PER_BOARD_FOOT = 'Per Board-Foot',
-  PER_PIECE = 'Per Piece',
+  PER_BOARD_FOOT = 'BDFT',
+  PER_PIECE = 'piece',
 }
 
 export default PriceType
