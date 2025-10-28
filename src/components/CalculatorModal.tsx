@@ -85,7 +85,7 @@ const CalculatorModal = () => {
       </Modal>
 
       <Text className={classes.links} onClick={open}>
-        Calculator
+        BDFT Calculator
       </Text>
     </>
   )

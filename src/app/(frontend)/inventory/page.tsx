@@ -10,7 +10,7 @@ export default async function InventoryPage() {
   const inventory = await payload.find({
     collection: 'lumber',
     limit: 100,
-    sort: 'woodSpecies',
+    sort: ['woodSpecies', 'id'],
   })
 
   console.log('INVENTORY', inventory)
