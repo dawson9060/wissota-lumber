@@ -1,7 +1,13 @@
 import InventoryComponent from '@/components/InventoryComponent'
 import config from '@/payload.config'
 import { Stack } from '@mantine/core'
+import { Metadata } from 'next'
 import { getPayload } from 'payload'
+
+export const metadata: Metadata = {
+  title: 'Wissota Lumber - Inventory',
+  description: 'Browse a range of lumber products',
+}
 
 export default async function InventoryPage() {
   const payloadConfig = await config

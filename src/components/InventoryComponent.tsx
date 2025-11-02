@@ -4,6 +4,7 @@ import WoodSpecies from '@/enums/WoodSpecies'
 import WoodState from '@/enums/WoodStates'
 import WoodThickness from '@/enums/WoodThickness'
 import { Lumber } from '@/payload-types'
+import { AnimatePresence, motion } from 'motion/react'
 import {
   Button,
   Checkbox,
@@ -180,7 +181,18 @@ const InventoryComponent = ({ inventory }: { inventory: PaginatedDocs<Lumber> })
           ) : activeData.length === 0 ? (
             <Text>No Items Match Your Filters</Text>
           ) : (
-            activeData.map((item) => <LumberDisplay key={item.id} lumberInfo={item} />)
+            <AnimatePresence>
+              {activeData.map((item) => (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  key={item.id}
+                >
+                  <LumberDisplay key={item.id} lumberInfo={item} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
           )}
         </Stack>
       </Stack>

@@ -15,9 +15,21 @@ const poppins = Poppins({
   weight: ['400'],
 })
 
+// TODO - add the prod URL and metadataBase URL (same thing - should be in env)
 export const metadata: Metadata = {
-  title: 'Wissota Lumber',
-  description: 'One stop shop for all your lumber needs',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_PAYLOAD_URL || ''),
+  title: 'Wissota Lumber - Lumber | Kiln Drying | Custom Sawing',
+  description:
+    'One-stop shop for several lumber-related products and services including custom sawing, kiln drying, and a range of lumber that includes rough-sawn, planed, and live-edge products.',
+  openGraph: {
+    title: 'Wissota Lumber - Lumber | Kiln Drying | Custom Sawing',
+    description:
+      'One-stop shop for several lumber-related products and services including custom sawing, kiln drying, and a range of lumber that includes rough-sawn, planed, and live-edge products.',
+    type: 'website',
+    locale: 'en_US',
+    url: process.env.NEXT_PUBLIC_PAYLOAD_URL,
+    siteName: 'Wissota Lumber',
+  },
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
@@ -31,9 +43,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       <body className={`${poppins.variable}`}>
         <MantineProvider theme={theme}>
           <SiteHeader />
-          <main className={classes.main}>
-            {children}
-          </main>
+          <main className={classes.main}>{children}</main>
           <Footer />
         </MantineProvider>
       </body>
