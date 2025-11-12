@@ -1,5 +1,4 @@
-import { Box, Divider, Group, Stack, Text, Title } from '@mantine/core'
-import Image from 'next/image'
+import { Box, Divider, Group, Stack, Text } from '@mantine/core'
 
 import classes from './HeroComponent.module.css'
 
@@ -7,11 +6,17 @@ const HeroComponent = () => {
   return (
     <Box className={classes.hero}>
       <Stack gap="0">
-        <Text fw="bold" fz="6rem">
-          Wissota
-        </Text>
-        <Text fw="bold" fz="6rem">
-          Lumber
+        <Text
+          fw="bold"
+          fz="7rem"
+          ta="center"
+          style={{
+            whiteSpace: 'pre-wrap',
+            wordBreak: 'break-word',
+            lineHeight: '1.1',
+          }}
+        >
+          Wissota Lumber
         </Text>
       </Stack>
       <Group>
