@@ -4,7 +4,7 @@ import WoodSpecies from '@/enums/WoodSpecies'
 import WoodState from '@/enums/WoodStates'
 import WoodThickness from '@/enums/WoodThickness'
 import { Lumber } from '@/payload-types'
-import { AnimatePresence, motion } from 'motion/react'
+import { motion, AnimatePresence } from 'motion/react'
 import {
   Button,
   Checkbox,
