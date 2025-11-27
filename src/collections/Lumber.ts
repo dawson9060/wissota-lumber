@@ -3,12 +3,33 @@ import WoodSpecies from '@/enums/WoodSpecies'
 import WoodState from '@/enums/WoodStates'
 import WoodThickness from '@/enums/WoodThickness'
 import { convertEnumToOptions } from '@/utilities'
-import type { CollectionConfig } from 'payload'
+import path from 'path'
+import type { CollectionAfterDeleteHook, CollectionConfig } from 'payload'
+import { fileURLToPath } from 'url'
+import fs from 'fs'
+
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
+
+const afterDeleteHook: CollectionAfterDeleteHook = async ({ req, id, doc }) => {
+  // Get the file path
+  const staticDir = path.resolve(dirname, '../../public/media')
+  const filePath = path.join(staticDir, doc.image.filename)
+
+  // Check if the file exists and delete it
+  if (fs.existsSync(filePath)) {
+    fs.unlinkSync(filePath)
+    console.log(`Deleted file: ${filePath}`)
+  }
+}
 
 const Lumber: CollectionConfig = {
   slug: 'lumber',
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterDelete: [afterDeleteHook],
   },
   fields: [
     {
@@ -71,89 +92,5 @@ const Lumber: CollectionConfig = {
     },
   ],
 }
-// const Lumber: CollectionConfig = {
-//   slug: 'lumber',
-//   access: {
-//     read: () => true,
-//   },
-//   fields: [
-//     {
-//       name: 'name',
-//       type: 'text',
-//       required: false,
-//     },
-//     {
-//       name: 'woodSpecies',
-//       label: 'Wood Type',
-//       type: 'select',
-//       required: true,
-//       options: [
-//         { label: 'Ash', value: 'ash' },
-//         { label: 'Oak', value: 'oak' },
-//         { label: 'Walnut', value: 'walnut' },
-//       ],
-//     },
-//     {
-//       name: 'price',
-//       type: 'number',
-//       required: true,
-//     },
-//     {
-//       name: 'priceType',
-//       label: 'Price Type',
-//       type: 'select',
-//       required: true,
-//       options: [
-//         { label: 'Per Board Foot', value: 'board_foot' },
-//         { label: 'Per Piece', value: 'piece' },
-//       ],
-//     },
-//     {
-//       name: 'amountAvailable',
-//       type: 'number',
-//       required: true,
-//     },
-//     {
-//       name: 'image',
-//       type: 'upload',
-//       relationTo: 'media',
-//       required: false,
-//     },
-//     {
-//       name: 'cutType',
-//       label: 'Wood Cut Type',
-//       type: 'select',
-//       required: true,
-//       options: [
-//         { label: 'Planed', value: 'planed' },
-//         { label: 'Rough Cut', value: 'rough_cut' },
-//       ],
-//     },
-//     {
-//       name: 'dimensions',
-//       type: 'select',
-//       label: 'Dimensions',
-//       required: true,
-//       options: [
-//         { label: '1/2', value: '1/2' },
-//         { label: '7/16', value: '7/16' },
-//         { label: '4/4', value: '4/4' },
-//         { label: '1 1/8', value: '1_1/8' },
-//         { label: '5/4', value: '5/4' },
-//         { label: '6/4', value: '6/4' },
-//         { label: '8/4', value: '8/4' },
-//         { label: 'Custom', value: 'custom' },
-//       ],
-//     },
-//     {
-//       name: 'customDimension',
-//       type: 'text',
-//       label: 'Custom Dimension',
-//       admin: {
-//         condition: (_, siblingData) => siblingData.dimensions === 'custom',
-//       },
-//     },
-//   ],
-// }
 
 export default Lumber

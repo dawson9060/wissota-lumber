@@ -1,13 +1,11 @@
 .hero {
-  background-image: url('/Hero5.png');
+  background-image: url('/Hero3.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   height: 500px; /* Adjust height as needed */
   width: 100%; /* Adjust width as needed */
   gap: 3rem;
-  /* margin: 20px auto;
-    border: 1px solid #ccc; */
   display: flex;
   flex-direction: column;
   justify-content: center;

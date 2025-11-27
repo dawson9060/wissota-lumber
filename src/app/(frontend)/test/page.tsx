@@ -14,7 +14,7 @@ type InfoComponentProps = {
 
 const InfoComponent = ({ title, description, imgUrl }: InfoComponentProps) => {
   return (
-    <Stack bdrs="0.25rem" style={{ boxShadow: '0px 6px 15px 3px rgba(0,0,0,0.15)' }}>
+    <Stack bdrs="0.25rem" style={{ boxShadow: '0px 6px 15px 3px rgba(0,0,0,0.05)' }}>
       <Stack w="100%" h="300px" pos="relative" bdrs="0.25rem" justify="center" align="center">
         <Image
           src={imgUrl}
@@ -86,9 +86,12 @@ export default async function TestPage() {
           />
         </SimpleGrid>
         <Stack bg="blue.0" py="2rem" px="2rem" gap="2rem" my="4rem">
-          <SimpleGrid type="container" cols={{ base: 1, '700px': 2 }}>
+          <SimpleGrid type="container" spacing="xl" cols={{ base: 1, '700px': 2 }}>
             <Stack>
-              <Title order={3}>Hours</Title>
+              <Stack gap="0">
+                <Title order={3}>Hours</Title>
+                <Divider />
+              </Stack>
               <Text>
                 <strong>Monday - Friday: </strong>7:00 AM - 5:00 PM
               </Text>
@@ -99,9 +102,11 @@ export default async function TestPage() {
                 <strong>Sunday: </strong>Closed
               </Text>
             </Stack>
-            {/* <Divider /> */}
             <Stack>
-              <Title order={3}>Contact Us</Title>
+              <Stack gap="0">
+                <Title order={3}>Contact Us</Title>
+                <Divider />
+              </Stack>
               <Group>
                 <Text fw="bold" miw="75px">
                   Phone:
