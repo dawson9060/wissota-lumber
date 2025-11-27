@@ -44,6 +44,8 @@ next-env.d.ts
 
 /media
 
+/public/media
+
 # Playwright
 node_modules/
 /test-results/
