@@ -1,12 +1,55 @@
 import HeroComponent from '@/components/HeroComponent'
 import MapWrapper from '@/components/MapWrapper'
-import { Anchor, Box, Button, Divider, Group, SimpleGrid, Stack, Text, Title } from '@mantine/core'
+import { Anchor, Box, Button, Divider, SimpleGrid, Stack, Text, Title } from '@mantine/core'
 import 'leaflet/dist/leaflet.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import classes from './styles.module.css'
 
-export default async function HomePage() {
+type InfoComponentProps = {
+  title: string
+  description: string
+  imgUrl: string
+}
+
+const InfoComponent = ({ title, description, imgUrl }: InfoComponentProps) => {
+  return (
+    <Stack bdrs="0.25rem" style={{ boxShadow: '0px 6px 15px 3px rgba(0,0,0,0.05)' }}>
+      <Stack w="100%" h="300px" pos="relative" bdrs="0.25rem" justify="center" align="center">
+        <Image
+          src={imgUrl}
+          fill
+          style={{
+            borderTopLeftRadius: '0.25rem',
+            borderTopRightRadius: '0.25rem',
+            objectFit: 'cover',
+          }}
+          alt="picture of lumber"
+        />
+        <Text
+          fz="4rem"
+          c="white"
+          ta="center"
+          style={{ zIndex: '100', textShadow: '2px 2px 4px rgb(0, 0, 0)' }}
+        >
+          {title}
+        </Text>
+      </Stack>
+      <Stack gap="1rem" p="1rem">
+        <Text>{description}</Text>
+        {(title === 'Lumber' || title === 'Slabs') && (
+          <Link href="/inventory" style={{ color: 'var(--mantine-color-blue-5' }}>
+            <Button variant="light" color="blue.5">
+              View our Inventory
+            </Button>
+          </Link>
+        )}
+      </Stack>
+    </Stack>
+  )
+}
+
+export default async function Page() {
   return (
     <>
       <HeroComponent />
@@ -14,121 +57,70 @@ export default async function HomePage() {
         <Title order={2} px="2rem" my="1rem">
           What We Offer
         </Title>
-        <Stack gap="4rem" px="2rem">
-          <SimpleGrid cols={2} spacing="2rem">
-            <Box
-              w="100%"
-              h="100%"
-              mih="300px"
-              pos="relative"
-              bdrs="0.25rem"
-              style={{ boxShadow: '0px 6px 15px 3px rgba(0,0,0,0.15)' }}
-            >
-              <Image
-                src="/lumber1.jpg"
-                fill
-                style={{ borderRadius: '0.25rem', objectFit: 'cover' }}
-                alt="picture of lumber"
-              />
-            </Box>
-            <Stack>
-              <Title order={3}>Lumber</Title>
-              <Divider />
-              <Text>
-                We offer a wide variety of lumber including but not limited to: Pine, Oak, Maple,
-                Cherry, Fir, Cedar, and more. Our lumber is sourced from sustainable forests and is
-                of the highest quality.
-              </Text>
+        <SimpleGrid px="2rem" spacing="xl" type="container" cols={{ base: 1, '700px': 2 }}>
+          <InfoComponent
+            title="Lumber"
+            description="We offer a wide range of rough and planed lumber in various sizes and species. All of our lumber
+            goes through a kiln drying process to ensure its stable and ready to use in your projects. Visit our inventory page
+            to view our current stock of Maple, Oak, Walnut, Pine, and more!"
+            imgUrl="/lumber1.jpg"
+          />
+          <InfoComponent
+            title="Slabs"
+            description="Alongside our lumber selection, we also offer a large variety of live edge slabs perfect for your 
+            custom furniture projects. Similar to our lumber inventory, our slabs come in a range of sizes and species. Please
+            check our inventory page for availability, or contact us to see if we can source the right 
+            slab for you!"
+            imgUrl="/slab1.jpg"
+          />
+          <InfoComponent
+            title="Custom Sawing"
+            description="Have a special project in mind? We offer custom milling services to help bring your ideas to life. Contact
+            us to discuss your project and get a quote."
+            imgUrl="/milling1.jpg"
+          />
 
-              <Link href="/inventory" style={{ color: 'var(--mantine-color-blue-5' }}>
-                <Button variant="light" color="blue.5">
-                  View our Inventory
-                </Button>
-              </Link>
-            </Stack>
-          </SimpleGrid>
-          <SimpleGrid cols={2} spacing="2rem">
+          <InfoComponent
+            title="Kiln Drying"
+            description="Looking to dry your own lumber or slabs? We offer kiln drying services to get your wood
+            to the ideal moisture content for your needs. Reach out to us for pricing and availability."
+            imgUrl="/kiln1.jpg"
+          />
+        </SimpleGrid>
+        <Stack bg="blue.0" py="2rem" px="2rem" mx="2rem" gap="2rem" my="4rem" bdrs="sm">
+          <SimpleGrid type="container" spacing="xl" cols={{ base: 1, '700px': 2 }}>
             <Stack>
-              <Title order={3}>Kiln Drying</Title>
-              <Divider />
+              <Stack gap="0">
+                <Title order={3}>Hours</Title>
+                <Divider />
+              </Stack>
               <Text>
-                We offer a wide variety of lumber including but not limited to: Pine, Oak, Maple,
-                Cherry, Fir, Cedar, and more. Our lumber is sourced from sustainable forests and is
-                of the highest quality.
-              </Text>
-            </Stack>
-            <Box
-              w="100%"
-              h="100%"
-              mih="300px"
-              pos="relative"
-              bdrs="0.25rem"
-              style={{ boxShadow: '0px 6px 15px 3px rgba(0,0,0,0.15)' }}
-            >
-              <Image
-                src="/kiln1.jpg"
-                fill
-                alt="picture of kiln"
-                style={{ borderRadius: '0.25rem', objectFit: 'cover' }}
-              />
-            </Box>
-          </SimpleGrid>
-          <SimpleGrid cols={2} spacing="2rem">
-            <Box
-              w="100%"
-              h="100%"
-              mih="300px"
-              pos="relative"
-              bdrs="0.25rem"
-              style={{ boxShadow: '0px 6px 15px 3px rgba(0,0,0,0.15)' }}
-            >
-              <Image
-                src="/milling1.jpg"
-                fill
-                alt="picture of milling"
-                style={{ borderRadius: '0.25rem', objectFit: 'cover' }}
-              />
-            </Box>
-            <Stack>
-              <Title order={3}>Custom Milling</Title>
-              <Divider />
-              <Text>
-                We offer a wide variety of lumber including but not limited to: Pine, Oak, Maple,
-                Cherry, Fir, Cedar, and more. Our lumber is sourced from sustainable forests and is
-                of the highest quality.
-              </Text>
-            </Stack>
-          </SimpleGrid>
-        </Stack>
-        <Stack bg="blue.0" py="2rem" px="2rem" gap="2rem" my="4rem">
-          <SimpleGrid cols={2}>
-            <Stack>
-              <Title order={3}>Hours</Title>
-              <Text>
-                <strong>Monday - Friday: </strong>7:00 AM - 5:00 PM
+                While we do not have set business hours, we are generally available weekdays and
+                some weekends.
               </Text>
               <Text>
-                <strong>Saturday: </strong>8:00 AM - 12:00 PM
-              </Text>
-              <Text>
-                <strong>Sunday: </strong>Closed
+                Please call ahead or email to enquire about availability or if you have any special
+                requests.
               </Text>
             </Stack>
             <Stack>
-              <Title order={3}>Contact Us</Title>
-              <Group>
+              <Stack gap="0">
+                <Title order={3}>Contact Us</Title>
+                <Divider />
+              </Stack>
+              <Box className={classes.contactGroup}>
                 <Text fw="bold" miw="75px">
                   Phone:
                 </Text>
                 <Anchor href="Tel:7158287239">(715) 828-7239</Anchor>
-              </Group>
-              <Group>
+              </Box>
+              <Box className={classes.contactGroup}>
                 <Text fw="bold" miw="75px">
                   Email:
                 </Text>
                 <Anchor href="mailto:wissotalumber@gmail.com">wissotalumber@gmail.com</Anchor>
-              </Group>
-              <Group align="flext-start" wrap="nowrap">
+              </Box>
+              <Box className={classes.contactGroup} style={{ wrap: 'nowrap' }}>
                 <Text fw="bold" miw="75px">
                   Address:
                 </Text>
@@ -143,7 +135,7 @@ export default async function HomePage() {
                 >
                   5497 173rd Street, Chippewa Falls, WI 54729
                 </Link>
-              </Group>
+              </Box>
             </Stack>
           </SimpleGrid>
         </Stack>

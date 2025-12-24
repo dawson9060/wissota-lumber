@@ -1,6 +1,6 @@
 import InventoryComponent from '@/components/InventoryComponent'
 import config from '@/payload.config'
-import { Stack } from '@mantine/core'
+import { Center, Stack } from '@mantine/core'
 import { Metadata } from 'next'
 import { getPayload } from 'payload'
 
@@ -13,13 +13,21 @@ export default async function InventoryPage() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
 
-  const inventory = await payload.find({
-    collection: 'lumber',
-    limit: 100,
-    sort: ['woodSpecies', 'id'],
-  })
-
-  console.log('INVENTORY', inventory)
+  let inventory
+  try {
+    inventory = await payload.find({
+      collection: 'lumber',
+      limit: 100,
+      sort: ['woodSpecies', 'id'],
+    })
+  } catch (error) {
+    console.error('Error fetching inventory:', error)
+    return (
+      <Center w="100vw" h="60vh">
+        <p>Failed to load inventory. Please try again later.</p>
+      </Center>
+    )
+  }
 
   return (
     <Stack

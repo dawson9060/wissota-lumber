@@ -7,3 +7,15 @@
   flex-direction: column;
   margin-top: 2rem;
 }
+
+.contactGroup {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (width < 450px) {
+  .contactGroup {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+}

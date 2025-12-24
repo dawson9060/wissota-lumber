@@ -142,7 +142,7 @@ const FilterDrawer = ({
         </Stack>
       </Drawer>
 
-      <Button color="blue" variant="outline" onClick={open}>
+      <Button color="gray.4" c="black" bg="white" variant="outline" onClick={open}>
         Filters {numFilters > 0 && `(${numFilters})`}
       </Button>
     </>
@@ -152,12 +152,17 @@ const FilterDrawer = ({
 const InventoryComponent = ({ inventory }: { inventory: PaginatedDocs<Lumber> }) => {
   const [activeData, setActiveData] = useState<Lumber[]>(inventory?.docs)
   const [sortType, setSortType] = useState<string>(SORT_SPECIES)
-
+  console.log('INVENTORY', inventory)
   return (
     <Stack className={classes.inventoryContainer}>
-      <Group justify="space-between">
-        <Title order={2}>Current Inventory</Title>
-        <Group>
+      <Group justify="space-between" align="flex-end">
+        <Stack gap="0.25rem">
+          <Title order={2}>Current Inventory</Title>
+          <Text>
+            Please call ahead to enquire about available quantities or with any special requests.
+          </Text>
+        </Stack>
+        <Group gap="0.5rem">
           <FilterDrawer
             defaultData={inventory?.docs || []}
             setActiveData={setActiveData}
@@ -174,7 +179,7 @@ const InventoryComponent = ({ inventory }: { inventory: PaginatedDocs<Lumber> })
         </Group>
       </Group>
       <Divider />
-      <Stack h="100%" mah="calc(100vh - 225px)" style={{ overflowY: 'auto' }}>
+      <Stack h="100%" mah="calc(100vh - 270px)" style={{ overflowY: 'auto' }}>
         <Stack gap="0.5rem" pb="1rem">
           {inventory?.docs.length === 0 ? (
             <Text>No Inventory Available</Text>

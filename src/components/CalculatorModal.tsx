@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Divider, Group, Modal, NumberInput, Stack, Text, Title } from '@mantine/core'
+import { Box, Button, Divider, Group, Modal, NumberInput, Stack, Text, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { useMemo, useState } from 'react'
 import classes from './SiteHeader.module.css'
@@ -64,16 +64,26 @@ const CalculatorModal = () => {
           />
           <NumberInput label="Price per bd/ft" hideControls value={price} onChange={setPrice} />
         </Stack>
-        <Group mt="1rem" bg="ghostwhite" p="1rem" justify="space-between">
-          <Text>
-            <strong>Total Board-Feet: </strong>
-            {totalBoardFeet}
-          </Text>
-          <Text>
-            <strong>Total Price: $</strong>
-            {price && totalBoardFeet ? totalBoardFeet * Number(price) : '0'}
-          </Text>
-        </Group>
+        <Stack
+          mt="1rem"
+          p="0.5rem"
+          gap="1rem"
+          justify="space-between"
+          style={{ borderRadius: '0.5rem', border: '1px solid var(--mantine-color-blue-1)' }}
+        >
+          <Box>
+            <Text>
+              <strong>Total Board-Feet: </strong>
+              {totalBoardFeet}
+            </Text>
+          </Box>
+          <Box>
+            <Text>
+              <strong>Total Price: $</strong>
+              {price && totalBoardFeet ? totalBoardFeet * Number(price) : '0'}
+            </Text>
+          </Box>
+        </Stack>
         <Group justify="flex-end" mt="2rem" gap="0.5rem">
           <Button color="orange.5" variant="outline" onClick={handleReset}>
             Reset

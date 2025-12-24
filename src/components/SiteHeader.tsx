@@ -1,9 +1,9 @@
 import { Box, Group, Title } from '@mantine/core'
-import Link from 'next/link'
-import ContactModal from './ContactModal'
-import classes from './SiteHeader.module.css'
-import CalculatorModal from './CalculatorModal'
 import Image from 'next/image'
+import Link from 'next/link'
+import CalculatorModal from './CalculatorModal'
+import MobileNavDrawer from './MobileNavDrawer'
+import classes from './SiteHeader.module.css'
 
 const SiteHeader = () => {
   return (
@@ -11,19 +11,24 @@ const SiteHeader = () => {
       <Group className={classes.navRow}>
         <Link href="/" style={{ textDecoration: 'none' }}>
           <Group gap="0">
-            <Image src="/LogoV2.png" width={50} height={50} alt="logo" />
+            <Image src="/logo.png" width={50} height={50} alt="logo" />
             <Title order={3} c="black">
               Wissota Lumber
             </Title>
           </Group>
         </Link>
-        <Group>
+        <Group align="center" className={classes.desktopNav}>
           <Link href="/inventory" className={classes.links}>
             Inventory
           </Link>
+          <Box w="1px" h="15px" bg="black" />
+          <Link href="/about" className={classes.links}>
+            About
+          </Link>
+          <Box w="1px" h="15px" bg="black" />
           <CalculatorModal />
-          <ContactModal />
         </Group>
+        <MobileNavDrawer />
       </Group>
     </nav>
   )

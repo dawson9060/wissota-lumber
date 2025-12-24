@@ -57,12 +57,6 @@ const Lumber: CollectionConfig = {
       options: convertEnumToOptions(PriceType),
     },
     {
-      name: 'amountAvailable',
-      label: 'Amount Available',
-      type: 'number',
-      required: true,
-    },
-    {
       name: 'woodState',
       label: 'Wood State',
       type: 'select',

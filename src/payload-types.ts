@@ -88,6 +88,7 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
+  fallbackLocale: null;
   globals: {};
   globalsSelect: {};
   locale: null;
@@ -177,25 +178,30 @@ export interface Media {
 export interface Lumber {
   id: string;
   woodSpecies:
+    | 'ALDER'
     | 'RED_OAK'
     | 'WHITE_OAK'
-    | 'PINE'
+    | 'WHITE_PINE'
+    | 'JACK_PINE'
+    | 'RED_PINE'
     | 'HARD_MAPLE'
     | 'SOFT_MAPLE'
     | 'CHERRY'
     | 'WHITE_ASH'
     | 'BLACK_ASH'
+    | 'URBAN_ASH'
     | 'WALNUT'
     | 'CEDAR'
-    | 'FIR'
+    | 'YELLOW_BIRCH'
+    | 'HONEY_LOCUST'
+    | 'HICKORY'
     | 'ELM'
     | 'BASSWOOD'
     | 'POPLAR';
   description?: string | null;
   price: number;
   priceType: 'PER_BOARD_FOOT' | 'PER_PIECE';
-  amountAvailable: number;
-  woodState: 'ROUGH_SAWN' | 'PLANED' | 'LIVE_EDGE';
+  woodState: 'ROUGH_SAWN' | 'PLANED' | 'SLAB';
   thickness:
     | 'ONE_HALF'
     | 'SEVEN_EIGHTHS'
@@ -205,6 +211,7 @@ export interface Lumber {
     | 'FIVE_QUARTERS'
     | 'SIX_QUARTERS'
     | 'EIGHT_QUARTERS'
+    | 'TWELVE_QUARTERS'
     | 'CUSTOM';
   customThickness?: string | null;
   image?: (string | null) | Media;
@@ -352,7 +359,6 @@ export interface LumberSelect<T extends boolean = true> {
   description?: T;
   price?: T;
   priceType?: T;
-  amountAvailable?: T;
   woodState?: T;
   thickness?: T;
   customThickness?: T;

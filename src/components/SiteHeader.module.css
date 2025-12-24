@@ -26,3 +26,18 @@
     color: var(--mantine-color-blue-5);
   }
 }
+.desktopNav {
+  display: flex;
+}
+.mobileNav {
+  display: none;
+}
+
+@media (width < 800px) {
+  .desktopNav {
+    display: none;
+  }
+  .mobileNav {
+    display: block;
+  }
+}
