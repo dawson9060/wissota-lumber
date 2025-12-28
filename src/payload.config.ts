@@ -94,7 +94,7 @@ const cloudinaryAdapter = () => ({
             overwrite: false, // Do not overwrite if a file with the same name exists
             use_filename: true, // Use original filename
           },
-          (error, result) => {
+          (error: any, result: any) => {
             if (error) return reject(error)
             if (!result) return reject(new Error('No result returned from Cloudinary'))
             resolve(result) // hanlde result
