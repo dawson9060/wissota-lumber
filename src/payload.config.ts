@@ -53,9 +53,12 @@ import Lumber from './collections/Lumber'
 import Specials from './collections/Specials'
 
 import { cloudStoragePlugin } from '@payloadcms/plugin-cloud-storage'
-import { v2 as cloudinary } from 'cloudinary'
+// import { v2 as cloudinary } from 'cloudinary'
 import type { HandleUpload, HandleDelete } from '@payloadcms/plugin-cloud-storage/types'
 import type { UploadApiResponse } from 'cloudinary'
+
+import * as cloudinaryModule from 'cloudinary'
+const cloudinary = (cloudinaryModule as any).v2 ?? cloudinaryModule
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
