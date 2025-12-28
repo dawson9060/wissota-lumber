@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     lumber: Lumber;
+    specials: Special;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +81,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     lumber: LumberSelect<false> | LumberSelect<true>;
+    specials: SpecialsSelect<false> | SpecialsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -220,6 +222,18 @@ export interface Lumber {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "specials".
+ */
+export interface Special {
+  id: string;
+  title: string;
+  description?: string | null;
+  image?: (string | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -253,6 +267,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'lumber';
         value: string | Lumber;
+      } | null)
+    | ({
+        relationTo: 'specials';
+        value: string | Special;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -362,6 +380,17 @@ export interface LumberSelect<T extends boolean = true> {
   woodState?: T;
   thickness?: T;
   customThickness?: T;
+  image?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "specials_select".
+ */
+export interface SpecialsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
   image?: T;
   updatedAt?: T;
   createdAt?: T;

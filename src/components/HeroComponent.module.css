@@ -16,7 +16,7 @@
 }
 
 .mainHeroText {
-  font-size: clamp(3rem, 4vw + 2rem, 7rem);
+  font-size: clamp(2rem, 4vw + 3rem, 7rem);
 }
 
 .subtextLarge {

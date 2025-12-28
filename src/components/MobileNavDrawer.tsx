@@ -14,12 +14,17 @@ const MobileNavDrawer = () => {
     <>
       <Drawer opened={opened} onClose={close}>
         <Stack>
-          <Link href="/inventory" className={classes.links}>
-            Inventory
-          </Link>
-          <Link href="/about" className={classes.links}>
-            About
-          </Link>
+          <Stack onClick={close}>
+            <Link href="/inventory" className={classes.links}>
+              Inventory
+            </Link>
+            <Link href="/specials" className={classes.links}>
+              Specials
+            </Link>
+            <Link href="/about" className={classes.links}>
+              About
+            </Link>
+          </Stack>
           <Divider />
           <CalculatorModal />
         </Stack>

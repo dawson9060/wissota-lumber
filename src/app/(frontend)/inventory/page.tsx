@@ -1,8 +1,11 @@
 import InventoryComponent from '@/components/InventoryComponent'
+import { ScrollingSpecials } from '@/components/ScrollingSpecials'
 import config from '@/payload.config'
 import { Center, Stack } from '@mantine/core'
 import { Metadata } from 'next'
 import { getPayload } from 'payload'
+
+import classes from './styles.module.css'
 
 export const metadata: Metadata = {
   title: 'Wissota Lumber - Inventory',
@@ -30,15 +33,8 @@ export default async function InventoryPage() {
   }
 
   return (
-    <Stack
-      mt="2rem"
-      px="2rem"
-      w="100%"
-      h="100%"
-      maw="1400px"
-      mx="auto"
-      style={{ overflowY: 'hidden' }}
-    >
+    <Stack mt="1rem" w="100%" h="100%" maw="1400px" mx="auto" className={classes.container}>
+      <ScrollingSpecials />
       <InventoryComponent inventory={inventory} />
     </Stack>
   )

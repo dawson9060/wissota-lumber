@@ -22,6 +22,10 @@ const SiteHeader = () => {
             Inventory
           </Link>
           <Box w="1px" h="15px" bg="black" />
+          <Link href="/specials" className={classes.links}>
+            Specials
+          </Link>
+          <Box w="1px" h="15px" bg="black" />
           <Link href="/about" className={classes.links}>
             About
           </Link>

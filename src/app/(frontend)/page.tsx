@@ -5,6 +5,8 @@ import 'leaflet/dist/leaflet.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import classes from './styles.module.css'
+import { ScrollingSpecials } from '@/components/ScrollingSpecials'
+import { TbBrandFacebook } from 'react-icons/tb'
 
 type InfoComponentProps = {
   title: string
@@ -54,10 +56,13 @@ export default async function Page() {
     <>
       <HeroComponent />
       <Stack gap="0" className={classes.landingContainer}>
-        <Title order={2} px="2rem" my="1rem">
+        <Box w="100%" pb="1rem">
+          <ScrollingSpecials />
+        </Box>
+        <Title order={2} my="1rem">
           What We Offer
         </Title>
-        <SimpleGrid px="2rem" spacing="xl" type="container" cols={{ base: 1, '700px': 2 }}>
+        <SimpleGrid spacing="2.5rem" type="container" cols={{ base: 1, '700px': 2 }}>
           <InfoComponent
             title="Lumber"
             description="We offer a wide range of rough and planed lumber in various sizes and species. All of our lumber
@@ -87,7 +92,7 @@ export default async function Page() {
             imgUrl="/kiln1.jpg"
           />
         </SimpleGrid>
-        <Stack bg="blue.0" py="2rem" px="2rem" mx="2rem" gap="2rem" my="4rem" bdrs="sm">
+        <Stack bg="blue.0" p="1rem" gap="2rem" my="4rem" bdrs="sm">
           <SimpleGrid type="container" spacing="xl" cols={{ base: 1, '700px': 2 }}>
             <Stack>
               <Stack gap="0">
@@ -136,10 +141,22 @@ export default async function Page() {
                   5497 173rd Street, Chippewa Falls, WI 54729
                 </Link>
               </Box>
+              <Box className={classes.contactGroup} style={{ wrap: 'nowrap' }}>
+                <Text fw="bold" mr="0.5rem">
+                  Social Media:
+                </Text>
+                <Link
+                  href="https://www.facebook.com/p/Wissota-Lumber-61566265372589/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <TbBrandFacebook size="1.5rem" color="var(--mantine-color-blue-5)" />
+                </Link>
+              </Box>
             </Stack>
           </SimpleGrid>
         </Stack>
-        <Stack px="2rem" mb="1rem">
+        <Stack mb="1rem">
           <Title order={3}>Find Us</Title>
           <MapWrapper />
         </Stack>

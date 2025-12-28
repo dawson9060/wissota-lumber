@@ -152,7 +152,7 @@ const FilterDrawer = ({
 const InventoryComponent = ({ inventory }: { inventory: PaginatedDocs<Lumber> }) => {
   const [activeData, setActiveData] = useState<Lumber[]>(inventory?.docs)
   const [sortType, setSortType] = useState<string>(SORT_SPECIES)
-  console.log('INVENTORY', inventory)
+
   return (
     <Stack className={classes.inventoryContainer}>
       <Group justify="space-between" align="flex-end">
@@ -179,7 +179,7 @@ const InventoryComponent = ({ inventory }: { inventory: PaginatedDocs<Lumber> })
         </Group>
       </Group>
       <Divider />
-      <Stack h="100%" mah="calc(100vh - 270px)" style={{ overflowY: 'auto' }}>
+      <Stack h="100%">
         <Stack gap="0.5rem" pb="1rem">
           {inventory?.docs.length === 0 ? (
             <Text>No Inventory Available</Text>

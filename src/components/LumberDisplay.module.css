@@ -1,0 +1,23 @@
+.container {
+  background-color: white;
+  padding: 1rem;
+  border-radius: var(--mantine-radius-sm);
+  box-shadow: '0 4px 12px rgba(0, 0, 0, 0.1)';
+  cursor: pointer;
+}
+
+.groupTwo {
+  justify-content: flex-end;
+}
+
+@media (width < 695px) {
+  .groupOne {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .groupTwo {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
