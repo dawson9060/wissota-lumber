@@ -13,7 +13,12 @@ const nextConfig = {
     return webpackConfig
   },
   images: {
-    domains: ['localhost', '/api*'],
+    domains: ['localhost', 'res.cloudinary.com', '/api*'],
+  },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '5mb',
+    },
   },
 }
 

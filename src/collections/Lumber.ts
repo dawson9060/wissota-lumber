@@ -12,14 +12,33 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 const afterDeleteHook: CollectionAfterDeleteHook = async ({ req, id, doc }) => {
-  // Get the file path
-  const staticDir = path.resolve(dirname, '../../public/media')
-  const filePath = path.join(staticDir, doc.image.filename)
+  // // Get the file path
+  // const staticDir = path.resolve(dirname, '../../public/media')
+  // const filePath = path.join(staticDir, doc.image.filename)
 
-  // Check if the file exists and delete it
-  if (fs.existsSync(filePath)) {
-    fs.unlinkSync(filePath)
-    console.log(`Deleted file: ${filePath}`)
+  // // Check if the file exists and delete it
+  // if (fs.existsSync(filePath)) {
+  //   fs.unlinkSync(filePath)
+  //   console.log(`Deleted file: ${filePath}`)
+  // }
+  if (doc.image) {
+    try {
+      // Fetch the related media document
+      const mediaDoc = await req.payload.findByID({
+        collection: 'media',
+        id: doc.image.id,
+      })
+
+      if (mediaDoc) {
+        // Delete the media file using the Cloudinary adapter
+        await req.payload.delete({
+          collection: 'media',
+          id: mediaDoc.id,
+        })
+      }
+    } catch (error) {
+      console.error('Error deleting associated media:', error)
+    }
   }
 }
 
