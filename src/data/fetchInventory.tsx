@@ -1,6 +1,7 @@
 import { unstable_cache as cache } from 'next/cache'
 import config from '@/payload.config'
 import { getPayload } from 'payload'
+import { TAG_INVENTORY } from './tags'
 
 // tags inventory cache under the name "inventory" so we can reset it after updates are made
 export const getInventory = cache(async () => {
@@ -19,4 +20,4 @@ export const getInventory = cache(async () => {
   }
 
   return inventory
-}, ['inventory'])
+}, [TAG_INVENTORY])

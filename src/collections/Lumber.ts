@@ -12,6 +12,7 @@ import type {
 import { fileURLToPath } from 'url'
 import fs from 'fs'
 import { revalidatePath, revalidateTag } from 'next/cache'
+import { TAG_INVENTORY } from '@/data/tags'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)

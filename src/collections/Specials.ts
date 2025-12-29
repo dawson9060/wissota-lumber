@@ -1,3 +1,4 @@
+import { TAG_SPECIALS } from '@/data/tags'
 import fs from 'fs'
 import { revalidateTag } from 'next/cache'
 import path from 'path'
