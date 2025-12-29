@@ -4,12 +4,22 @@ import WoodState from '@/enums/WoodStates'
 import WoodThickness from '@/enums/WoodThickness'
 import { convertEnumToOptions } from '@/utilities'
 import path from 'path'
-import type { CollectionAfterDeleteHook, CollectionConfig } from 'payload'
+import type {
+  CollectionAfterChangeHook,
+  CollectionAfterDeleteHook,
+  CollectionConfig,
+} from 'payload'
 import { fileURLToPath } from 'url'
 import fs from 'fs'
+import { revalidatePath } from 'next/cache'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+const afterChangeHook: CollectionAfterChangeHook = async ({ req, id, doc }) => {
+  // revalidate inventory
+  revalidatePath('/inventory')
+}
 
 const afterDeleteHook: CollectionAfterDeleteHook = async ({ req, id, doc }) => {
   // // Get the file path
@@ -21,6 +31,7 @@ const afterDeleteHook: CollectionAfterDeleteHook = async ({ req, id, doc }) => {
   //   fs.unlinkSync(filePath)
   //   console.log(`Deleted file: ${filePath}`)
   // }
+
   if (doc.image) {
     try {
       // Fetch the related media document
@@ -40,6 +51,9 @@ const afterDeleteHook: CollectionAfterDeleteHook = async ({ req, id, doc }) => {
       console.error('Error deleting associated media:', error)
     }
   }
+
+  // revalidate inventory
+  revalidatePath('/inventory')
 }
 
 const Lumber: CollectionConfig = {
@@ -49,6 +63,7 @@ const Lumber: CollectionConfig = {
   },
   hooks: {
     afterDelete: [afterDeleteHook],
+    afterChange: [afterChangeHook],
   },
   fields: [
     {
