@@ -11,14 +11,15 @@ import type {
 } from 'payload'
 import { fileURLToPath } from 'url'
 import fs from 'fs'
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 const afterChangeHook: CollectionAfterChangeHook = async () => {
   // revalidate inventory
-  revalidatePath('/inventory')
+  // revalidatePath('/inventory')
+  revalidateTag(TAG_INVENTORY)
 }
 
 const afterDeleteHook: CollectionAfterDeleteHook = async ({ req, doc }) => {
@@ -53,7 +54,8 @@ const afterDeleteHook: CollectionAfterDeleteHook = async ({ req, doc }) => {
   }
 
   // revalidate inventory
-  revalidatePath('/inventory')
+  // revalidatePath('/inventory')
+  revalidateTag(TAG_INVENTORY)
 }
 
 const Lumber: CollectionConfig = {
