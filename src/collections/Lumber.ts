@@ -16,12 +16,12 @@ import { revalidatePath } from 'next/cache'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-const afterChangeHook: CollectionAfterChangeHook = async ({ req, id, doc }) => {
+const afterChangeHook: CollectionAfterChangeHook = async () => {
   // revalidate inventory
   revalidatePath('/inventory')
 }
 
-const afterDeleteHook: CollectionAfterDeleteHook = async ({ req, id, doc }) => {
+const afterDeleteHook: CollectionAfterDeleteHook = async ({ req, doc }) => {
   // // Get the file path
   // const staticDir = path.resolve(dirname, '../../public/media')
   // const filePath = path.join(staticDir, doc.image.filename)

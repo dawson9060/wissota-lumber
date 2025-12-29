@@ -41,3 +41,9 @@
     display: block;
   }
 }
+
+@media (width < 450px) {
+  .navRow {
+    padding: 0.5rem 1.25rem;
+  }
+}
