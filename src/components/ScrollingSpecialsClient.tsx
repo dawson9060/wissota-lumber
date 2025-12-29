@@ -37,6 +37,7 @@ const ScrollingSpecialsClient = ({ specials }: { specials: Special[] }) => {
   return (
     <Group
       c="black"
+      mt="1rem"
       bdrs="sm"
       p="sm"
       bg="white"

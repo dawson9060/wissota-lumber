@@ -20,7 +20,7 @@ const BladesComponent = () => {
 
 const Page = () => {
   return (
-    <Stack maw="1400px" mx="auto" gap="2rem" pb="4rem" pt="1rem" className={classes.container}>
+    <Stack maw="1400px" mx="auto" gap="2rem" pb="4rem" className={classes.container}>
       <ScrollingSpecials />
       <Stack gap="4rem">
         <Stack>

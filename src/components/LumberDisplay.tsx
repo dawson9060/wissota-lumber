@@ -24,7 +24,7 @@ const LumberDisplay = ({ lumberInfo }: { lumberInfo: Lumber }) => {
   const [opened, { toggle }] = useDisclosure(false)
 
   const imagePath = typeof lumberInfo.image === 'object' ? lumberInfo.image?.url : lumberInfo.image
-
+  console.log('LUMBER INFO', lumberInfo)
   return (
     <Stack className={classes.container} onClick={toggle}>
       <SimpleGrid type="container" cols={{ base: 1, '600px': 2 }}>

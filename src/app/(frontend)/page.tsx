@@ -56,10 +56,10 @@ export default async function Page() {
     <>
       <HeroComponent />
       <Stack gap="0" className={classes.landingContainer}>
-        <Box w="100%" pb="1rem">
+        <Box w="100%">
           <ScrollingSpecials />
         </Box>
-        <Title order={2} my="1rem">
+        <Title order={2} mt="2rem" mb="1rem">
           What We Offer
         </Title>
         <SimpleGrid spacing="2.5rem" type="container" cols={{ base: 1, '700px': 2 }}>

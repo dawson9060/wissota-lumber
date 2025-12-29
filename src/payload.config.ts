@@ -57,18 +57,18 @@ import { cloudStoragePlugin } from '@payloadcms/plugin-cloud-storage'
 import type { HandleUpload, HandleDelete } from '@payloadcms/plugin-cloud-storage/types'
 import type { UploadApiResponse } from 'cloudinary'
 
-import * as cloudinaryModule from 'cloudinary'
-const cloudinary = (cloudinaryModule as any).v2 ?? cloudinaryModule
+// import * as cloudinaryModule from 'cloudinary'
+// const cloudinary = (cloudinaryModule as any).v2 ?? cloudinaryModule
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 //setting up clodinary CONFIG
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-})
+// cloudinary.config({
+//   cloud_name: process.env.CLOUDINARY_NAME,
+//   api_key: process.env.CLOUDINARY_API_KEY,
+//   api_secret: process.env.CLOUDINARY_API_SECRET,
+// })
 
 // creating cloudinary adapter
 const cloudinaryAdapter = () => ({
@@ -87,6 +87,18 @@ const cloudinaryAdapter = () => ({
       // so we can use async/await syntax for cleaner, easier handling.
       // It uploads the file with a specific public_id under "media/", without overwriting existing files.
       const uploadResult = await new Promise<UploadApiResponse>((resolve, reject) => {
+        const cloudinaryModule = require('cloudinary')
+        const cloudinary =
+          (cloudinaryModule as any).v2 ??
+          (cloudinaryModule.default && (cloudinaryModule.default.v2 ?? cloudinaryModule.default)) ??
+          +cloudinaryModule
+
+        cloudinary.config({
+          cloud_name: process.env.CLOUDINARY_NAME,
+          api_key: process.env.CLOUDINARY_API_KEY,
+          api_secret: process.env.CLOUDINARY_API_SECRET,
+        })
+
         const uploadStream = cloudinary.uploader.upload_stream(
           {
             resource_type: 'auto', // auto-detect file type (image, video, etc.)
@@ -112,6 +124,18 @@ const cloudinaryAdapter = () => ({
 
   async handleDelete({ collection, doc, filename, req }: Parameters<HandleDelete>[0]) {
     // if filename is present then we will look for that file
+    const cloudinaryModule = require('cloudinary')
+    const cloudinary =
+      (cloudinaryModule as any).v2 ??
+      (cloudinaryModule.default && (cloudinaryModule.default.v2 ?? cloudinaryModule.default)) ??
+      +cloudinaryModule
+
+    cloudinary.config({
+      cloud_name: process.env.CLOUDINARY_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_API_SECRET,
+    })
+
     try {
       // We remove the file extension from the filename and then target the file
       // inside the "media/" folder on Cloudinary (which we used as the upload path)
@@ -153,7 +177,9 @@ export default buildConfig({
           generateFileURL: ({ filename }) => {
             // Since we uploaded the file with a "media/" prefix in its public_id,
             // we include "media/" here to correctly generate the Cloudinary URL for the file.
-            return cloudinary.url(`media/${filename}`, { secure: true })
+            return `https://res.cloudinary.com/wissotalumber/image/upload/v1/media/${filename}`
+
+            // return cloudinary.url(`media/${filename}`, { secure: true })
           },
         },
       },
