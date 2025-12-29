@@ -87,6 +87,7 @@ const cloudinaryAdapter = () => ({
       // so we can use async/await syntax for cleaner, easier handling.
       // It uploads the file with a specific public_id under "media/", without overwriting existing files.
       const uploadResult = await new Promise<UploadApiResponse>((resolve, reject) => {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         const cloudinaryModule = require('cloudinary')
         const cloudinary =
           (cloudinaryModule as any).v2 ??
@@ -98,6 +99,8 @@ const cloudinaryAdapter = () => ({
           api_key: process.env.CLOUDINARY_API_KEY,
           api_secret: process.env.CLOUDINARY_API_SECRET,
         })
+
+        // const { v2: cloudinary } = await import("cloudinary");
 
         const uploadStream = cloudinary.uploader.upload_stream(
           {
@@ -124,6 +127,7 @@ const cloudinaryAdapter = () => ({
 
   async handleDelete({ collection, doc, filename, req }: Parameters<HandleDelete>[0]) {
     // if filename is present then we will look for that file
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const cloudinaryModule = require('cloudinary')
     const cloudinary =
       (cloudinaryModule as any).v2 ??
