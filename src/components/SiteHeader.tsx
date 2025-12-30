@@ -11,7 +11,7 @@ const SiteHeader = () => {
       <Group className={classes.navRow}>
         <Link href="/" style={{ textDecoration: 'none' }}>
           <Group gap="0">
-            <Image src="/logo.png" width={50} height={50} alt="logo" />
+            <Image src="/logo.webp" width={50} height={50} alt="logo" />
             <Title order={3} c="black">
               Wissota Lumber
             </Title>
