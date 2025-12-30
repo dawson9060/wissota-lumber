@@ -8,7 +8,7 @@ import { Carousel } from '@mantine/carousel'
 export const ImageCarousel = () => {
   const autoplay = useRef(Autoplay({ delay: 4000 }))
 
-  const images = ['/kiln1.jpg', '/lumber1.jpg', '/milling2.jpg']
+  const images = ['/kiln1.webp', '/lumber1.webp', '/milling2.webp']
 
   const slides = images.map((url) => (
     <Carousel.Slide key={url}>

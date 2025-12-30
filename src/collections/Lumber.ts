@@ -1,39 +1,21 @@
+import { TAG_INVENTORY } from '@/data/tags'
 import PriceType from '@/enums/PriceType'
 import WoodSpecies from '@/enums/WoodSpecies'
 import WoodState from '@/enums/WoodStates'
 import WoodThickness from '@/enums/WoodThickness'
 import { convertEnumToOptions } from '@/utilities'
-import path from 'path'
+import { revalidateTag } from 'next/cache'
 import type {
   CollectionAfterChangeHook,
   CollectionAfterDeleteHook,
   CollectionConfig,
 } from 'payload'
-import { fileURLToPath } from 'url'
-import fs from 'fs'
-import { revalidatePath, revalidateTag } from 'next/cache'
-import { TAG_INVENTORY } from '@/data/tags'
-
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
 
 const afterChangeHook: CollectionAfterChangeHook = async () => {
-  // revalidate inventory
-  // revalidatePath('/inventory')
   revalidateTag(TAG_INVENTORY)
 }
 
 const afterDeleteHook: CollectionAfterDeleteHook = async ({ req, doc }) => {
-  // // Get the file path
-  // const staticDir = path.resolve(dirname, '../../public/media')
-  // const filePath = path.join(staticDir, doc.image.filename)
-
-  // // Check if the file exists and delete it
-  // if (fs.existsSync(filePath)) {
-  //   fs.unlinkSync(filePath)
-  //   console.log(`Deleted file: ${filePath}`)
-  // }
-
   if (doc.image) {
     try {
       // Fetch the related media document
@@ -54,8 +36,6 @@ const afterDeleteHook: CollectionAfterDeleteHook = async ({ req, doc }) => {
     }
   }
 
-  // revalidate inventory
-  // revalidatePath('/inventory')
   revalidateTag(TAG_INVENTORY)
 }
 

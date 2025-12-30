@@ -9,8 +9,8 @@ import {
   Button,
   Collapse,
   Divider,
+  Grid,
   Group,
-  SimpleGrid,
   Stack,
   Text,
   Title,
@@ -27,29 +27,37 @@ const LumberDisplay = ({ lumberInfo }: { lumberInfo: Lumber }) => {
   console.log('LUMBER INFO', lumberInfo)
   return (
     <Stack className={classes.container} onClick={toggle}>
-      <SimpleGrid type="container" cols={{ base: 1, '600px': 2 }}>
-        <Group className={classes.groupOne}>
-          <Title miw="100px" order={5}>
-            {WoodSpecies[lumberInfo.woodSpecies]}
-          </Title>
-          <Group gap="xs">
-            <Badge size="lg" color="green" variant="light">
-              {lumberInfo.customThickness || WoodThickness[lumberInfo.thickness]}
-            </Badge>
-            <Badge size="lg" color="blue.5" variant="light">
-              {WoodState[lumberInfo.woodState]}
-            </Badge>
+      <Grid
+        columns={10}
+        type="container"
+        breakpoints={{ xs: '100px', sm: '200px', md: '600px', lg: '700px', xl: '800px' }}
+      >
+        <Grid.Col span={{ base: 10, md: 6 }}>
+          <Group className={classes.groupOne}>
+            <Title miw="100px" order={5}>
+              {WoodSpecies[lumberInfo.woodSpecies]}
+            </Title>
+            <Group gap="xs">
+              <Badge size="lg" color="green" variant="light">
+                {lumberInfo.customThickness || WoodThickness[lumberInfo.thickness]}
+              </Badge>
+              <Badge size="lg" color="blue.5" variant="light">
+                {WoodState[lumberInfo.woodState]}
+              </Badge>
+            </Group>
           </Group>
-        </Group>
-        <Group className={classes.groupTwo}>
-          <Text>
-            ${lumberInfo.price}/{PriceType[lumberInfo.priceType]}
-          </Text>
-          <Button w="105px" color="blue.5" variant="subtle" size="xs">
-            {opened ? 'Hide Details' : 'Show Details'}
-          </Button>
-        </Group>
-      </SimpleGrid>
+        </Grid.Col>
+        <Grid.Col span={{ base: 10, md: 4 }}>
+          <Group className={classes.groupTwo}>
+            <Text>
+              ${lumberInfo.price}/{PriceType[lumberInfo.priceType]}
+            </Text>
+            <Button w="105px" color="blue.5" variant="subtle" size="xs">
+              {opened ? 'Hide Details' : 'Show Details'}
+            </Button>
+          </Group>
+        </Grid.Col>
+      </Grid>
       <Collapse in={opened}>
         <Divider mb="1rem" />
         <Stack>

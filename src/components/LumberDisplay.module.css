@@ -4,13 +4,13 @@
   border-radius: var(--mantine-radius-sm);
   box-shadow: '0 4px 12px rgba(0, 0, 0, 0.1)';
   cursor: pointer;
+  container-type: inline-size;
 }
-
 .groupTwo {
   justify-content: flex-end;
 }
 
-@media (width < 695px) {
+@container (width < 600px) {
   .groupOne {
     width: 100%;
     justify-content: space-between;

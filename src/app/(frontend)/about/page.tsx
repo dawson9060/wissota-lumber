@@ -10,10 +10,10 @@ import classes from './styles.module.css'
 const BladesComponent = () => {
   return (
     <Group align="center" gap="0.5rem" mx="auto">
-      <Image className={classes.blade} src="/blade.png" width={50} height={50} alt="saw blade" />
-      <Image className={classes.blade} src="/blade.png" width={50} height={50} alt="saw blade" />
-      <Image className={classes.blade} src="/blade.png" width={50} height={50} alt="saw blade" />
-      <Image className={classes.blade} src="/blade.png" width={50} height={50} alt="saw blade" />
+      <Image className={classes.blade} src="/blade.webp" width={50} height={50} alt="saw blade" />
+      <Image className={classes.blade} src="/blade.webp" width={50} height={50} alt="saw blade" />
+      <Image className={classes.blade} src="/blade.webp" width={50} height={50} alt="saw blade" />
+      <Image className={classes.blade} src="/blade.webp" width={50} height={50} alt="saw blade" />
     </Group>
   )
 }

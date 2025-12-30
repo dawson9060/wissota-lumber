@@ -1,34 +1,16 @@
 import { TAG_SPECIALS } from '@/data/tags'
-import fs from 'fs'
 import { revalidateTag } from 'next/cache'
-import path from 'path'
 import type {
   CollectionAfterChangeHook,
   CollectionAfterDeleteHook,
   CollectionConfig,
 } from 'payload'
-import { fileURLToPath } from 'url'
-
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
 
 const afterChangeHook: CollectionAfterChangeHook = async () => {
-  // revalidate inventory
-  // revalidatePath('/inventory')
   revalidateTag(TAG_SPECIALS)
 }
 
 const afterDeleteHook: CollectionAfterDeleteHook = async ({ req, id, doc }) => {
-  // Get the file path
-  // const staticDir = path.resolve(dirname, '../../public/media')
-  // const filePath = path.join(staticDir, doc.image.filename)
-
-  // // Check if the file exists and delete it
-  // if (fs.existsSync(filePath)) {
-  //   fs.unlinkSync(filePath)
-  //   console.log(`Deleted file: ${filePath}`)
-  // }
-
   if (doc.image) {
     try {
       // Fetch the related media document
@@ -49,8 +31,6 @@ const afterDeleteHook: CollectionAfterDeleteHook = async ({ req, id, doc }) => {
     }
   }
 
-  // revalidate inventory
-  // revalidatePath('/inventory')
   revalidateTag(TAG_SPECIALS)
 }
 

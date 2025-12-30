@@ -68,7 +68,7 @@ export default async function Page() {
             description="We offer a wide range of rough and planed lumber in various sizes and species. All of our lumber
             goes through a kiln drying process to ensure its stable and ready to use in your projects. Visit our inventory page
             to view our current stock of Maple, Oak, Walnut, Pine, and more!"
-            imgUrl="/lumber1.jpg"
+            imgUrl="/lumber1.webp"
           />
           <InfoComponent
             title="Slabs"
@@ -76,20 +76,20 @@ export default async function Page() {
             custom furniture projects. Similar to our lumber inventory, our slabs come in a range of sizes and species. Please
             check our inventory page for availability, or contact us to see if we can source the right 
             slab for you!"
-            imgUrl="/slab1.jpg"
+            imgUrl="/slab1.webp"
           />
           <InfoComponent
             title="Custom Sawing"
             description="Have a special project in mind? We offer custom milling services to help bring your ideas to life. Contact
             us to discuss your project and get a quote."
-            imgUrl="/milling1.jpg"
+            imgUrl="/milling1.webp"
           />
 
           <InfoComponent
             title="Kiln Drying"
             description="Looking to dry your own lumber or slabs? We offer kiln drying services to get your wood
             to the ideal moisture content for your needs. Reach out to us for pricing and availability."
-            imgUrl="/kiln1.jpg"
+            imgUrl="/kiln1.webp"
           />
         </SimpleGrid>
         <Stack bg="blue.0" p="1rem" gap="2rem" my="4rem" bdrs="sm">
@@ -150,7 +150,7 @@ export default async function Page() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <TbBrandFacebook size="1.5rem" color="var(--mantine-color-blue-5)" />
+                  <TbBrandFacebook size="1.3rem" color="var(--mantine-color-blue-5)" />
                 </Link>
               </Box>
             </Stack>

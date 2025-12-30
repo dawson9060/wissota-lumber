@@ -4,8 +4,8 @@ import WoodSpecies from '@/enums/WoodSpecies'
 import WoodState from '@/enums/WoodStates'
 import WoodThickness from '@/enums/WoodThickness'
 import { Lumber } from '@/payload-types'
-import { motion, AnimatePresence } from 'motion/react'
 import {
+  Box,
   Button,
   Checkbox,
   Divider,
@@ -13,11 +13,13 @@ import {
   Group,
   ScrollArea,
   Select,
+  SimpleGrid,
   Stack,
   Text,
   Title,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
+import { AnimatePresence, motion } from 'motion/react'
 import { PaginatedDocs } from 'payload'
 import { useEffect, useState } from 'react'
 import LumberDisplay from './LumberDisplay'
@@ -30,7 +32,7 @@ const SORT_TYPE = 'Type'
 
 const sortTypes = [SORT_SPECIES, SORT_PRICE, SORT_TYPE]
 
-const FilterDrawer = ({
+const FilterComponent = ({
   defaultData,
   setActiveData,
   sortType,
@@ -42,10 +44,6 @@ const FilterDrawer = ({
   const [speciesFilters, setSpeciesFilters] = useState<string[]>([])
   const [stateFilters, setStateFilters] = useState<string[]>([])
   const [thicknessFilters, setThicknessFilters] = useState<string[]>([])
-
-  const numFilters = speciesFilters.length + stateFilters.length + thicknessFilters.length
-
-  const [opened, { open, close }] = useDisclosure(false)
 
   useEffect(() => {
     let newData = [...defaultData]
@@ -102,50 +100,93 @@ const FilterDrawer = ({
   }
 
   return (
-    <>
-      <Drawer opened={opened} onClose={close} scrollAreaComponent={ScrollArea.Autosize}>
-        <Stack>
-          <Group w="100%" justify="space-between">
-            <Text fw="bold">Wood Species</Text>
-            <Button
-              variant="outline"
-              size="compact-sm"
-              color="blue.5"
-              onClick={() => handleResetFilters()}
-            >
-              Reset Filters
-            </Button>
-          </Group>
-          <Checkbox.Group value={speciesFilters} onChange={setSpeciesFilters}>
-            {Object.entries(WoodSpecies).map(([key, value]) => (
-              <Checkbox color="blue.5" mb="0.5rem" key={key} label={value} value={key} />
-            ))}
-          </Checkbox.Group>
-        </Stack>
-        <Divider w="100%" my="1rem" />
-        <Stack>
-          <Text fw="bold">Wood Type</Text>
-          <Checkbox.Group value={stateFilters} onChange={setStateFilters}>
-            {Object.entries(WoodState).map(([key, value]) => (
-              <Checkbox color="blue.5" mb="0.5rem" key={key} label={value} value={key} />
-            ))}
-          </Checkbox.Group>
-        </Stack>
-        <Divider w="100%" my="1rem" />
-        <Stack>
-          <Text fw="bold">Wood Thickness</Text>
-          <Checkbox.Group value={thicknessFilters} onChange={setThicknessFilters}>
+    <Stack gap="1rem">
+      <Stack>
+        <Group w="100%" justify="space-between">
+          <Text fw="bold">Species</Text>
+          <Button
+            variant="outline"
+            size="compact-sm"
+            color="blue.5"
+            onClick={() => handleResetFilters()}
+          >
+            Reset
+          </Button>
+        </Group>
+        <Checkbox.Group value={speciesFilters} onChange={setSpeciesFilters}>
+          {Object.entries(WoodSpecies).map(([key, value]) => (
+            <Checkbox color="blue.5" mb="0.5rem" key={key} label={value} value={key} />
+          ))}
+        </Checkbox.Group>
+      </Stack>
+      <Divider w="100%" />
+      <Stack>
+        <Text fw="bold">Wood Type</Text>
+        <Checkbox.Group value={stateFilters} onChange={setStateFilters}>
+          {Object.entries(WoodState).map(([key, value]) => (
+            <Checkbox color="blue.5" mb="0.5rem" key={key} label={value} value={key} />
+          ))}
+        </Checkbox.Group>
+      </Stack>
+      <Divider w="100%" />
+      <Stack>
+        <Text fw="bold">Wood Thickness</Text>
+        <Checkbox.Group value={thicknessFilters} onChange={setThicknessFilters}>
+          <SimpleGrid cols={2} spacing="0.25rem">
             {Object.entries(WoodThickness).map(([key, value]) => (
               <Checkbox color="blue.5" mb="0.5rem" key={key} label={value} value={key} />
             ))}
-          </Checkbox.Group>
-        </Stack>
-      </Drawer>
+          </SimpleGrid>
+        </Checkbox.Group>
+      </Stack>
+    </Stack>
+  )
+}
 
+const FilterDrawer = ({
+  defaultData,
+  setActiveData,
+  sortType,
+}: {
+  defaultData: Lumber[]
+  setActiveData: (data: Lumber[]) => void
+  sortType: string
+}) => {
+  const [opened, { open, close }] = useDisclosure(false)
+
+  return (
+    <Box className={classes.filtersDrawer}>
+      <Drawer opened={opened} keepMounted onClose={close} scrollAreaComponent={ScrollArea.Autosize}>
+        <FilterComponent
+          defaultData={defaultData}
+          setActiveData={setActiveData}
+          sortType={sortType}
+        />
+      </Drawer>
       <Button color="gray.4" c="black" bg="white" variant="outline" onClick={open}>
-        Filters {numFilters > 0 && `(${numFilters})`}
+        Filters
       </Button>
-    </>
+    </Box>
+  )
+}
+
+const FilterSidebar = ({
+  defaultData,
+  setActiveData,
+  sortType,
+}: {
+  defaultData: Lumber[]
+  setActiveData: (data: Lumber[]) => void
+  sortType: string
+}) => {
+  return (
+    <Stack className={classes.filtersSidebar}>
+      <FilterComponent
+        defaultData={defaultData}
+        setActiveData={setActiveData}
+        sortType={sortType}
+      />
+    </Stack>
   )
 }
 
@@ -180,26 +221,33 @@ const InventoryComponent = ({ inventory }: { inventory: PaginatedDocs<Lumber> })
       </Group>
       <Divider />
       <Stack h="100%">
-        <Stack gap="0.5rem" pb="1rem">
-          {inventory?.docs.length === 0 ? (
-            <Text>No Inventory Available</Text>
-          ) : activeData.length === 0 ? (
-            <Text>No Items Match Your Filters</Text>
-          ) : (
-            <AnimatePresence>
-              {activeData.map((item) => (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  key={item.id}
-                >
-                  <LumberDisplay key={item.id} lumberInfo={item} />
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          )}
-        </Stack>
+        <Group w="100%" wrap="nowrap" align="flex-start" pb="1rem">
+          <FilterSidebar
+            defaultData={inventory?.docs || []}
+            setActiveData={setActiveData}
+            sortType={sortType}
+          />
+          <Stack gap="0.5rem" w="100%">
+            {inventory?.docs.length === 0 ? (
+              <Text>No Inventory Available</Text>
+            ) : activeData.length === 0 ? (
+              <Text>No Items Match Your Filters</Text>
+            ) : (
+              <AnimatePresence>
+                {activeData.map((item) => (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    key={item.id}
+                  >
+                    <LumberDisplay key={item.id} lumberInfo={item} />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            )}
+          </Stack>
+        </Group>
       </Stack>
     </Stack>
   )

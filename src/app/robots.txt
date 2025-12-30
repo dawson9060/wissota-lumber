@@ -2,5 +2,3 @@ User-Agent: *
 Allow: /
 Disallow: /admin/
 Sitemap: https://wissotalumber.com/sitemap.xml
-
-// TODO - ensure this is the right url

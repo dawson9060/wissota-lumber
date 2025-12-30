@@ -7,3 +7,23 @@
   flex: 1;
   overflow: hidden;
 }
+.filtersSidebar {
+  display: flex;
+  width: 230px !important;
+  min-width: 230px;
+  background-color: white;
+  border-radius: var(--mantine-radius-sm);
+  padding: 1rem;
+}
+.filtersDrawer {
+  display: none;
+}
+
+@media (width < 800px) {
+  .filtersSidebar {
+    display: none;
+  }
+  .filtersDrawer {
+    display: block;
+  }
+}
