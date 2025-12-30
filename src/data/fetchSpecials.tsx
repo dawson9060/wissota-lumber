@@ -4,19 +4,23 @@ import { getPayload } from 'payload'
 import { TAG_SPECIALS } from './tags'
 
 // tags inventory cache under the name "inventory" so we can reset it after updates are made
-export const getSpecials = cache(async () => {
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
+export const getSpecials = cache(
+  async () => {
+    const payloadConfig = await config
+    const payload = await getPayload({ config: payloadConfig })
 
-  let specials = null
-  try {
-    specials = await payload.find({
-      collection: 'specials',
-      limit: 100,
-    })
-  } catch (error) {
-    console.error('Error fetching specials:', error)
-  }
+    let specials = null
+    try {
+      specials = await payload.find({
+        collection: 'specials',
+        limit: 100,
+      })
+    } catch (error) {
+      console.error('Error fetching specials:', error)
+    }
 
-  return specials
-}, [TAG_SPECIALS])
+    return specials
+  },
+  [TAG_SPECIALS],
+  { tags: [TAG_SPECIALS], revalidate: false },
+)
