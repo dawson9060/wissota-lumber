@@ -1,6 +1,6 @@
 import HeroComponent from '@/components/HeroComponent'
 import MapWrapper from '@/components/MapWrapper'
-import { Anchor, Box, Button, Divider, SimpleGrid, Stack, Text, Title } from '@mantine/core'
+import { Anchor, Box, Button, Divider, Group, SimpleGrid, Stack, Text, Title } from '@mantine/core'
 import 'leaflet/dist/leaflet.css'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -104,7 +104,7 @@ export default async function Page() {
                 some weekends.
               </Text>
               <Text>
-                Please call ahead or email to enquire about availability or if you have any special
+                Please call ahead or email to inquire about availability or if you have any special
                 requests.
               </Text>
             </Stack>
@@ -117,7 +117,11 @@ export default async function Page() {
                 <Text fw="bold" miw="75px">
                   Phone:
                 </Text>
-                <Anchor href="Tel:7158287239">(715) 828-7239</Anchor>
+                <Group gap="xs">
+                  <Anchor href="Tel:7158287239">(715) 828-7239</Anchor>
+                  <Box w="1px" h="15px" bg="black" />
+                  <Anchor href="Tel:7157237864">(715) 723-7864</Anchor>
+                </Group>
               </Box>
               <Box className={classes.contactGroup}>
                 <Text fw="bold" miw="75px">

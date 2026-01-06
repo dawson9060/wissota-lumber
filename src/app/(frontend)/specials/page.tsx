@@ -60,7 +60,7 @@ const SpecialsPage = async () => {
     <Stack mt="2rem" w="100%" h="100%" maw="1400px" mx="auto" className={classes.container}>
       <Stack gap="0.25rem">
         <Title order={2}>Current Specials</Title>
-        <Text>Please call ahead to enquire about available quantities.</Text>
+        <Text>Please call ahead to inquire about available quantities.</Text>
       </Stack>
       <Divider />
       {specials?.docs.length === 0 ? (

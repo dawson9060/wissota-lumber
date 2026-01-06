@@ -200,7 +200,7 @@ const InventoryComponent = ({ inventory }: { inventory: PaginatedDocs<Lumber> })
         <Stack gap="0.25rem">
           <Title order={2}>Current Inventory</Title>
           <Text>
-            Please call ahead to enquire about available quantities or with any special requests.
+            Please call ahead to inquire about available quantities or with any special requests.
           </Text>
         </Stack>
         <Group gap="0.5rem">

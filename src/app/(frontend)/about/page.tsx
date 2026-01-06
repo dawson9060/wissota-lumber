@@ -20,9 +20,9 @@ const BladesComponent = () => {
 
 const Page = () => {
   return (
-    <Stack maw="1400px" mx="auto" gap="2rem" pb="4rem" className={classes.container}>
+    <Stack maw="1400px" mx="auto" gap="0" pb="4rem" className={classes.container}>
       <ScrollingSpecials />
-      <Stack gap="4rem">
+      <Stack gap="4rem" pt="2rem">
         <Stack>
           <Title order={2}>Our Story</Title>
           <Divider />

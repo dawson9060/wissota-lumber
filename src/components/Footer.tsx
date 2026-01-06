@@ -8,10 +8,15 @@ const Footer = () => {
         <Group gap="xs">
           <TbPhone color="white" />
           <Text fz="sm" c="white">
+            715-723-7864
+          </Text>
+        </Group>
+        <Box w="1px" h="15px" bg="white" />
+        <Group gap="xs">
+          <Text fz="sm" c="white">
             715-828-7239
           </Text>
         </Group>
-
         <Box w="1px" h="15px" bg="white" />
         <Group gap="xs">
           <TbMail color="white" />
