@@ -21,7 +21,7 @@ const Footer = () => {
         <Group gap="xs">
           <TbMail color="white" />
           <Text fz="sm" c="white">
-            wissotalumber@gmail.com
+            wissotalumbers@gmail.com
           </Text>
         </Group>
       </Group>

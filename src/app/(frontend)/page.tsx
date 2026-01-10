@@ -127,7 +127,7 @@ export default async function Page() {
                 <Text fw="bold" miw="75px">
                   Email:
                 </Text>
-                <Anchor href="mailto:wissotalumber@gmail.com">wissotalumber@gmail.com</Anchor>
+                <Anchor href="mailto:wissotalumbers@gmail.com">wissotalumbers@gmail.com</Anchor>
               </Box>
               <Box className={classes.contactGroup} style={{ wrap: 'nowrap' }}>
                 <Text fw="bold" miw="75px">

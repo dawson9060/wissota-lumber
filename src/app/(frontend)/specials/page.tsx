@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { getPayload } from 'payload'
 
 import classes from './styles.module.css'
+import { getSpecials } from '@/data/fetchSpecials'
 
 export const metadata: Metadata = {
   title: 'Wissota Lumber - Specials',
@@ -41,19 +42,10 @@ const SpecialsPage = async () => {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
 
-  let specials
-  try {
-    specials = await payload.find({
-      collection: 'specials',
-      limit: 100,
-    })
-  } catch (error) {
-    console.error('Error fetching specials:', error)
-    return (
-      <Center w="100vw" h="60vh">
-        <Text>No Specials available. Please check again later.</Text>
-      </Center>
-    )
+  const specials = await getSpecials()
+
+  if (!specials || specials.totalDocs === 0) {
+    return null
   }
 
   return (
