@@ -36,10 +36,12 @@ const FilterComponent = ({
   defaultData,
   setActiveData,
   sortType,
+  close,
 }: {
   defaultData: Lumber[]
   setActiveData: (data: Lumber[]) => void
   sortType: string
+  close?: () => void
 }) => {
   const [speciesFilters, setSpeciesFilters] = useState<string[]>([])
   const [stateFilters, setStateFilters] = useState<string[]>([])
@@ -96,7 +98,10 @@ const FilterComponent = ({
 
     setActiveData(sorted)
 
-    close()
+    // only call close if it exists (i.e., in drawer mode)
+    if (close) {
+      close()
+    }
   }
 
   return (
@@ -161,6 +166,7 @@ const FilterDrawer = ({
           defaultData={defaultData}
           setActiveData={setActiveData}
           sortType={sortType}
+          close={close}
         />
       </Drawer>
       <Button color="gray.4" c="black" bg="white" variant="outline" onClick={open}>

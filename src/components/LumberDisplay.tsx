@@ -24,7 +24,7 @@ const LumberDisplay = ({ lumberInfo }: { lumberInfo: Lumber }) => {
   const [opened, { toggle }] = useDisclosure(false)
 
   const imagePath = typeof lumberInfo.image === 'object' ? lumberInfo.image?.url : lumberInfo.image
-  console.log('LUMBER INFO', lumberInfo)
+
   return (
     <Stack className={classes.container} onClick={toggle}>
       <Grid
@@ -63,7 +63,7 @@ const LumberDisplay = ({ lumberInfo }: { lumberInfo: Lumber }) => {
         <Stack>
           <Text pb="1rem">{lumberInfo.description}</Text>
           <Box pos="relative" w="100%" h="300px" bg="gray" style={{ borderRadius: '4px' }}>
-            {imagePath && (
+            {imagePath && imagePath.includes('res.cloudinary') && (
               <Image
                 src={imagePath}
                 alt={lumberInfo.description || 'Lumber Image'}

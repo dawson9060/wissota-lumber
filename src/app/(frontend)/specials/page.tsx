@@ -21,7 +21,7 @@ const SpecialComponent = ({ item }: { item: Special }) => {
       <Divider />
       <Text pb="1rem">{item.description}</Text>
       <Box w="100%" h="300px" pos="relative" bg="gray" style={{ borderRadius: '4px' }}>
-        {imagePath && (
+        {imagePath && imagePath.includes('res.cloudinary') && (
           <Image
             src={imagePath}
             alt={item.description || 'Special Image'}

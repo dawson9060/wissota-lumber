@@ -15,7 +15,6 @@ const poppins = Poppins({
   weight: ['400'],
 })
 
-// TODO - add the prod URL and metadataBase URL (same thing - should be in env)
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_PAYLOAD_URL || ''),
   title: 'Wissota Lumber - Lumber | Kiln Drying | Custom Sawing',

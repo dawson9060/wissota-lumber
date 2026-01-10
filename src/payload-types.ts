@@ -171,25 +171,25 @@ export interface Lumber {
   id: string;
   woodSpecies:
     | 'ALDER'
-    | 'RED_OAK'
-    | 'WHITE_OAK'
-    | 'WHITE_PINE'
-    | 'JACK_PINE'
-    | 'RED_PINE'
-    | 'HARD_MAPLE'
-    | 'SOFT_MAPLE'
-    | 'CHERRY'
-    | 'WHITE_ASH'
+    | 'BASSWOOD'
     | 'BLACK_ASH'
+    | 'CEDAR'
+    | 'CHERRY'
+    | 'ELM'
+    | 'HARD_MAPLE'
+    | 'HICKORY'
+    | 'HONEY_LOCUST'
+    | 'JACK_PINE'
+    | 'POPLAR'
+    | 'RED_OAK'
+    | 'RED_PINE'
+    | 'SOFT_MAPLE'
     | 'URBAN_ASH'
     | 'WALNUT'
-    | 'CEDAR'
-    | 'YELLOW_BIRCH'
-    | 'HONEY_LOCUST'
-    | 'HICKORY'
-    | 'ELM'
-    | 'BASSWOOD'
-    | 'POPLAR';
+    | 'WHITE_ASH'
+    | 'WHITE_OAK'
+    | 'WHITE_PINE'
+    | 'YELLOW_BIRCH';
   description?: string | null;
   price: number;
   priceType: 'PER_BOARD_FOOT' | 'PER_PIECE';
