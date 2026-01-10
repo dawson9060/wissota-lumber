@@ -7,6 +7,7 @@ import { Lumber } from '@/payload-types'
 import {
   Box,
   Button,
+  Center,
   Checkbox,
   Divider,
   Drawer,
@@ -235,7 +236,9 @@ const InventoryComponent = ({ inventory }: { inventory: PaginatedDocs<Lumber> })
           />
           <Stack gap="0.5rem" w="100%">
             {inventory?.docs.length === 0 ? (
-              <Text>No Inventory Available</Text>
+              <Center w="100%" h="200px">
+                <Text>No Inventory Available</Text>
+              </Center>
             ) : activeData.length === 0 ? (
               <Text>No Items Match Your Filters</Text>
             ) : (

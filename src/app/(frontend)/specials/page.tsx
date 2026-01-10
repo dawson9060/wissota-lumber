@@ -39,14 +39,7 @@ const SpecialComponent = ({ item }: { item: Special }) => {
 }
 
 const SpecialsPage = async () => {
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-
   const specials = await getSpecials()
-
-  if (!specials || specials.totalDocs === 0) {
-    return null
-  }
 
   return (
     <Stack mt="2rem" w="100%" h="100%" maw="1400px" mx="auto" className={classes.container}>
@@ -56,7 +49,9 @@ const SpecialsPage = async () => {
       </Stack>
       <Divider />
       {specials?.docs.length === 0 ? (
-        <Text>No Specials Available</Text>
+        <Center w="100%" h="200px">
+          <Text>No Specials Available</Text>
+        </Center>
       ) : (
         <Stack gap="1.5rem" pb="1rem">
           {specials?.docs.map((item) => (
