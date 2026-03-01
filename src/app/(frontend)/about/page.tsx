@@ -81,7 +81,7 @@ const Page = () => {
               <Divider />
               <Text>
                 Have specific dimensions in-mind? We offer precision milling tailored to your
-                project's exact specifications.
+                project&apos;s exact specifications.
               </Text>
             </Stack>
             <Stack p="1.5rem" gap="xs" bdrs="sm" bg="white">
