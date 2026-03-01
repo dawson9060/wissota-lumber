@@ -4,9 +4,8 @@ import { Anchor, Box, Button, Divider, Group, SimpleGrid, Stack, Text, Title } f
 import 'leaflet/dist/leaflet.css'
 import Image from 'next/image'
 import Link from 'next/link'
-import classes from './styles.module.css'
-import { ScrollingSpecials } from '@/components/ScrollingSpecials'
 import { TbBrandFacebook } from 'react-icons/tb'
+import classes from './styles.module.css'
 
 type InfoComponentProps = {
   title: string
@@ -16,7 +15,7 @@ type InfoComponentProps = {
 
 const InfoComponent = ({ title, description, imgUrl }: InfoComponentProps) => {
   return (
-    <Stack bdrs="0.25rem" style={{ boxShadow: '0px 6px 15px 3px rgba(0,0,0,0.05)' }}>
+    <Stack className={classes.infoCard}>
       <Stack w="100%" h="300px" pos="relative" bdrs="0.25rem" justify="center" align="center">
         <Image
           src={imgUrl}
@@ -37,12 +36,19 @@ const InfoComponent = ({ title, description, imgUrl }: InfoComponentProps) => {
           {title}
         </Text>
       </Stack>
-      <Stack gap="1rem" p="1rem">
+      <Stack gap="1rem" p="1rem" flex="1" justify="space-between">
         <Text>{description}</Text>
-        {(title === 'Lumber' || title === 'Slabs') && (
+        {title === 'Lumber' && (
           <Link href="/inventory" style={{ color: 'var(--mantine-color-blue-5' }}>
             <Button variant="light" color="blue.5">
-              View our Inventory
+              View our Lumber
+            </Button>
+          </Link>
+        )}
+        {title === 'Slabs' && (
+          <Link href="/slabs" style={{ color: 'var(--mantine-color-blue-5' }}>
+            <Button variant="light" color="blue.5">
+              View our Slabs
             </Button>
           </Link>
         )}
@@ -56,9 +62,6 @@ export default async function Page() {
     <>
       <HeroComponent />
       <Stack gap="0" className={classes.landingContainer}>
-        <Box w="100%">
-          <ScrollingSpecials />
-        </Box>
         <Title order={2} mt="2rem" mb="1rem">
           What We Offer
         </Title>
@@ -74,7 +77,7 @@ export default async function Page() {
             title="Slabs"
             description="Alongside our lumber selection, we also offer a large variety of live edge slabs perfect for your 
             custom furniture projects. Similar to our lumber inventory, our slabs come in a range of sizes and species. Please
-            check our inventory page for availability, or contact us to see if we can source the right 
+            check our slabs page for availability, or contact us to see if we can source the right 
             slab for you!"
             imgUrl="/slab1.webp"
           />

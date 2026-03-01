@@ -18,6 +18,7 @@ import {
   Stack,
   Text,
   Title,
+  Tooltip,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { AnimatePresence, motion } from 'motion/react'
@@ -26,6 +27,7 @@ import { useEffect, useState } from 'react'
 import LumberDisplay from './LumberDisplay'
 
 import classes from './InventoryComponent.module.css'
+import { TbInfoCircle } from 'react-icons/tb'
 
 const SORT_SPECIES = 'Species'
 const SORT_PRICE = 'Price'
@@ -111,7 +113,7 @@ const FilterComponent = ({
         <Group w="100%" justify="space-between">
           <Text fw="bold">Species</Text>
           <Button
-            variant="outline"
+            variant="light"
             size="compact-sm"
             color="blue.5"
             onClick={() => handleResetFilters()}
@@ -136,7 +138,16 @@ const FilterComponent = ({
       </Stack>
       <Divider w="100%" />
       <Stack>
-        <Text fw="bold">Wood Thickness</Text>
+        <Group gap="xs">
+          <Text fw="bold">Wood Thickness</Text>
+          <Tooltip
+            multiline
+            maw="260px"
+            label="Lumber is measured in inches. Most of our lumber beyond 1 inch thick is measured in quarters. For example, 6/4 is the same as 1.5 inches and 8/4 is 2 inches."
+          >
+            <TbInfoCircle color="gray" size="1.25rem" />
+          </Tooltip>
+        </Group>
         <Checkbox.Group value={thicknessFilters} onChange={setThicknessFilters}>
           <SimpleGrid cols={2} spacing="0.25rem">
             {Object.entries(WoodThickness).map(([key, value]) => (
@@ -205,7 +216,7 @@ const InventoryComponent = ({ inventory }: { inventory: PaginatedDocs<Lumber> })
     <Stack className={classes.inventoryContainer}>
       <Group justify="space-between" align="flex-end">
         <Stack gap="0.25rem">
-          <Title order={2}>Current Inventory</Title>
+          <Title order={2}>Lumber Inventory</Title>
           <Text>
             Please call ahead to inquire about available quantities or with any special requests.
           </Text>

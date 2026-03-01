@@ -19,11 +19,11 @@ const SiteHeader = () => {
         </Link>
         <Group align="center" className={classes.desktopNav}>
           <Link href="/inventory" className={classes.links}>
-            Inventory
+            Lumber
           </Link>
           <Box w="1px" h="15px" bg="black" />
-          <Link href="/specials" className={classes.links}>
-            Specials
+          <Link href="/slabs" className={classes.links}>
+            Slabs
           </Link>
           <Box w="1px" h="15px" bg="black" />
           <Link href="/about" className={classes.links}>

@@ -16,10 +16,10 @@ const MobileNavDrawer = () => {
         <Stack>
           <Stack onClick={close}>
             <Link href="/inventory" className={classes.links}>
-              Inventory
+              Lumber
             </Link>
-            <Link href="/specials" className={classes.links}>
-              Specials
+            <Link href="/slabs" className={classes.links}>
+              Slabs
             </Link>
             <Link href="/about" className={classes.links}>
               About

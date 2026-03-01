@@ -25,6 +25,7 @@ export const ImageCarousel = () => {
     <Carousel
       withIndicators
       height={400}
+      style={{ padding: '0 2rem' }}
       plugins={[autoplay.current]}
       onMouseEnter={autoplay.current.stop}
       onMouseLeave={() => autoplay.current.play()}

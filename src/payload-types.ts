@@ -70,7 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     lumber: Lumber;
-    specials: Special;
+    slabs: Slab;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -81,7 +81,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     lumber: LumberSelect<false> | LumberSelect<true>;
-    specials: SpecialsSelect<false> | SpecialsSelect<true>;
+    slabs: SlabsSelect<false> | SlabsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -193,7 +193,7 @@ export interface Lumber {
   description?: string | null;
   price: number;
   priceType: 'PER_BOARD_FOOT' | 'PER_PIECE';
-  woodState: 'ROUGH_SAWN' | 'PLANED' | 'SLAB';
+  woodState: 'ROUGH_SAWN' | 'PLANED';
   thickness:
     | 'ONE_HALF'
     | 'SEVEN_EIGHTHS'
@@ -212,9 +212,9 @@ export interface Lumber {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "specials".
+ * via the `definition` "slabs".
  */
-export interface Special {
+export interface Slab {
   id: string;
   title: string;
   description?: string | null;
@@ -259,8 +259,8 @@ export interface PayloadLockedDocument {
         value: string | Lumber;
       } | null)
     | ({
-        relationTo: 'specials';
-        value: string | Special;
+        relationTo: 'slabs';
+        value: string | Slab;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -362,9 +362,9 @@ export interface LumberSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "specials_select".
+ * via the `definition` "slabs_select".
  */
-export interface SpecialsSelect<T extends boolean = true> {
+export interface SlabsSelect<T extends boolean = true> {
   title?: T;
   description?: T;
   image?: T;

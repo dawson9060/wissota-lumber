@@ -9,7 +9,7 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import Lumber from './collections/Lumber'
-import Specials from './collections/Specials'
+import Slabs from './collections/Slabs'
 
 import { cloudStoragePlugin } from '@payloadcms/plugin-cloud-storage'
 import type { HandleUpload, HandleDelete } from '@payloadcms/plugin-cloud-storage/types'
@@ -93,7 +93,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Lumber, Specials],
+  collections: [Users, Media, Lumber, Slabs],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

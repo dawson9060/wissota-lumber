@@ -1,4 +1,4 @@
-import { TAG_SPECIALS } from '@/data/tags'
+import { TAG_SLABS } from '@/data/tags'
 import { revalidateTag } from 'next/cache'
 import type {
   CollectionAfterChangeHook,
@@ -7,7 +7,7 @@ import type {
 } from 'payload'
 
 const afterChangeHook: CollectionAfterChangeHook = async () => {
-  revalidateTag(TAG_SPECIALS)
+  revalidateTag(TAG_SLABS)
 }
 
 const afterDeleteHook: CollectionAfterDeleteHook = async ({ req, id, doc }) => {
@@ -31,11 +31,11 @@ const afterDeleteHook: CollectionAfterDeleteHook = async ({ req, id, doc }) => {
     }
   }
 
-  revalidateTag(TAG_SPECIALS)
+  revalidateTag(TAG_SLABS)
 }
 
-const Specials: CollectionConfig = {
-  slug: 'specials',
+const Slabs: CollectionConfig = {
+  slug: 'slabs',
   access: {
     read: () => true,
   },
@@ -64,4 +64,4 @@ const Specials: CollectionConfig = {
   ],
 }
 
-export default Specials
+export default Slabs

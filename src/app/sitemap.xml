@@ -3,25 +3,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://wissotalumber.com</loc>
-    <lastmod>2025-11-02</lastmod>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://wissotalumber.com/inventory</loc>
-    <lastmod>2025-11-02</lastmod>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wissotalumber.com/specials</loc>
-    <lastmod>2025-11-02</lastmod>
+    <loc>https://wissotalumber.com/slabs</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://wissotalumber.com/about</loc>
-    <lastmod>2025-11-02</lastmod>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
